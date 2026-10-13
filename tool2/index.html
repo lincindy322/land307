@@ -3,11 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>多分數加法計算器（通分、不約分）</title>
+    <title>多分數加法計算器（連前持分計算）</title>
     <style>
+        :root {
+            --ty-primary: #E6005A;   /* 桃紅 */
+            --ty-secondary: #008080; /* 藍綠 */
+            --ty-dark: #2A2A2A;      
+            --ty-light: #F9F9FB;     
+            --ty-white: #FFFFFF;
+            --ty-gray: #E0E0E0;
+            --ty-accent-bg: #FFF0F5;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f6;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--ty-light);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -15,19 +25,22 @@
             margin: 0;
             padding: 20px;
             box-sizing: border-box;
+            color: var(--ty-dark);
         }
         .container {
-            background-color: white;
+            background-color: var(--ty-white);
             padding: 30px;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             max-width: 650px;
             width: 100%;
+            border-top: 4px solid var(--ty-primary);
         }
         h2 {
             text-align: center;
-            color: #2c3e50;
+            color: var(--ty-primary);
             margin-bottom: 25px;
+            font-size: 1.4rem;
         }
         .fractions-wrapper {
             display: flex;
@@ -53,23 +66,23 @@
             height: 38px;
             text-align: center;
             font-size: 16px;
-            border: 2px solid #bdc3c7;
+            border: 2px solid var(--ty-gray);
             border-radius: 6px;
             outline: none;
             transition: border-color 0.3s;
         }
         .fraction-input input:focus {
-            border-color: #3498db;
+            border-color: var(--ty-primary);
         }
         .fraction-line {
             width: 60px;
             height: 2px;
-            background-color: #2c3e50;
+            background-color: var(--ty-dark);
         }
         .operator {
             font-size: 24px;
             font-weight: bold;
-            color: #2c3e50;
+            color: var(--ty-dark);
         }
         .btn-group {
             display: flex;
@@ -83,34 +96,33 @@
             border-radius: 6px;
             font-size: 16px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: opacity 0.3s;
+        }
+        button:hover {
+            opacity: 0.85;
         }
         .btn-calc {
-            background-color: #2ecc71;
+            background-color: var(--ty-primary);
             color: white;
             font-weight: bold;
         }
-        .btn-calc:hover {
-            background-color: #27ae60;
-        }
         .btn-add {
-            background-color: #3498db;
-            color: white;
-        }
-        .btn-add:hover {
-            background-color: #2980b9;
+            background-color: var(--ty-accent-bg);
+            color: var(--ty-primary);
+            font-weight: bold;
+            border: 1px solid var(--ty-primary);
         }
         .btn-remove {
-            background-color: #e74c3c;
-            color: white;
-        }
-        .btn-remove:hover {
-            background-color: #c0392b;
+            background-color: #fdf2f2;
+            color: #d9534f;
+            font-weight: bold;
+            border: 1px solid #d9534f;
         }
         .result-box {
             margin-top: 25px;
             padding: 20px;
-            background-color: #eef2f5;
+            background-color: var(--ty-light);
+            border: 1px solid var(--ty-gray);
             border-radius: 8px;
             display: none;
             text-align: center;
@@ -125,12 +137,12 @@
         .math-line {
             width: 100%;
             height: 2px;
-            background: #000;
+            background: #2A2A2A;
             margin: 2px 0;
         }
         .equation-display {
-            font-size: 22px;
-            color: #2c3e50;
+            font-size: 20px;
+            color: var(--ty-dark);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -139,8 +151,8 @@
             line-height: 2;
         }
         .final-answer {
-            font-size: 26px;
-            color: #27ae60;
+            font-size: 24px;
+            color: var(--ty-primary);
             font-weight: bold;
         }
     </style>
@@ -148,11 +160,9 @@
 <body>
 
 <div class="container">
-    <h2>多分數加法計算器</h2>
+    <h2>多分數加法計算器（連前持分計算）</h2>
     
-    <div class="fractions-wrapper" id="fractionsContainer">
-        <!-- 預設提供 3 個分數輸入框 -->
-    </div>
+    <div class="fractions-wrapper" id="fractionsContainer"></div>
 
     <div class="btn-group">
         <button class="btn-add" onclick="addFractionInput()">＋ 增加分數</button>
@@ -248,17 +258,13 @@
             denominators.push(d);
         }
 
-        // 算出公分母
         let commonDenom = denominators[0];
         for (let i = 1; i < denominators.length; i++) {
             commonDenom = getLCM(commonDenom, denominators[i]);
         }
 
-        // 算出通分後的各個分子
         const newNumerators = numerators.map((n, i) => n * (commonDenom / denominators[i]));
         const sumNumerator = newNumerators.reduce((a, b) => a + b, 0);
-
-        // 組合輸出的算式 string (通分後 -> 分子 1+2+3 -> 總和)
         const expandedNumeratorStr = newNumerators.join(' + ');
         
         let outputHTML = "";
