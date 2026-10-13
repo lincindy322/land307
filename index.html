@@ -6,15 +6,19 @@
     <title>徐瑛宜地政事務所—桃園協議價購案件辦理流程</title>
     <style>
         :root {
-            --ty-primary: #E6005A;   /* 桃紅 */
-            --ty-secondary: #008080; /* 輔助色/藍綠 */
+            --ty-primary: #E6005A;   /* 桃園桃紅 (魅力桃園) */
+            --ty-secondary: #00A0E9; /* 桃園科技藍 (智慧科技) */
+            --ty-yellow: #FFD100;    /* 桃園友善黃 (婦幼友善) */
+            --ty-green: #8DC63F;     /* 桃園永續綠 (環保永續) */
+            
             --ty-dark: #2A2A2A;      /* 深灰色文字 */
-            --ty-light: #F9F9FB;     /* 背景淺灰色 */
+            --ty-light: #F4F6F8;     /* 背景淺灰色 */
             --ty-white: #FFFFFF;
             --ty-gray: #E0E0E0;
             --ty-accent-bg: #FFF0F5;
-            --ty-yellow-bg: #fff3cd;  /* 切結黃底背景 */
-            --ty-yellow-border: #ffc107;
+            
+            --ty-yellow-bg: #FFFDF0;  /* 柔和黃底 */
+            --ty-yellow-border: #FFD100;
         }
 
         * {
@@ -56,7 +60,7 @@
             padding: 0 1rem;
         }
 
-        /* 步驟導覽列 (與下方欄位寬度一致) */
+        /* 步驟導覽列 */
         .step-navigation {
             display: flex;
             gap: 8px;
@@ -107,8 +111,8 @@
 
         .optional-tag {
             font-size: 0.65rem;
-            color: #d9534f;
-            background: #fdf2f2;
+            color: var(--ty-primary);
+            background: var(--ty-accent-bg);
             border-radius: 4px;
             padding: 2px 4px;
             margin-top: 4px;
@@ -135,7 +139,6 @@
             display: block;
         }
 
-        /* 標題與按鈕區塊 */
         .panel-header {
             border-bottom: 2px solid var(--ty-primary);
             padding-bottom: 0.8rem;
@@ -157,32 +160,31 @@
             margin-top: 0.4rem;
         }
 
-        /* 統一黃底切結卡片樣式 */
+        /* 黃底切結區塊 */
         .cut-box {
             background: var(--ty-yellow-bg);
-            border-left: 4px solid var(--ty-yellow-border);
+            border-left: 4px solid var(--ty-yellow);
             padding: 8px 12px;
             margin-top: 6px;
             border-radius: 4px;
             font-size: 0.9rem;
-            color: #856404;
+            color: #7A6000;
             line-height: 1.6;
         }
 
         .highlight-text {
-            color: #d9534f;
+            color: var(--ty-primary);
             font-weight: bold;
         }
 
         .yellow-highlight {
-            background-color: #fff3cd;
+            background-color: #FEF9C3;
             padding: 2px 6px;
             border-radius: 3px;
-            color: #856404;
+            color: #7A6000;
             font-weight: bold;
         }
 
-        /* 資訊網格排版 */
         .info-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -215,7 +217,6 @@
             font-size: 0.92rem;
         }
 
-        /* 表格 RWD 包裹區 */
         .table-responsive {
             width: 100%;
             overflow-x: auto;
@@ -242,7 +243,6 @@
             white-space: nowrap;
         }
 
-        /* 簽約檢核表樣式 */
         .check-table {
             margin-bottom: 1.5rem;
             border: 2px solid var(--ty-primary);
@@ -266,7 +266,6 @@
             width: 15%;
         }
 
-        /* 直式流程卡片 (步驟四) */
         .flow-vertical-container {
             max-width: 750px;
             margin: 1rem auto;
@@ -297,7 +296,6 @@
             line-height: 1;
         }
 
-        /* 可折疊 Q&A 樣式 */
         .qa-section {
             margin-top: 1.5rem;
             border: 1px solid var(--ty-gray);
@@ -358,7 +356,7 @@
             line-height: 1.6;
         }
 
-        /* 按鈕與 Pop-up 觸發按鈕 */
+        /* 統一按鈕視覺設計 (主色桃紅、輔助科技藍) */
         .btn-link {
             display: inline-flex;
             align-items: center;
@@ -380,30 +378,19 @@
         }
 
         .btn-link.sec {
-            background-color: var(--ty-secondary);
-        }
-
-        .btn-link.purple {
-            background-color: #6f42c1;
-        }
-
-        .btn-link.orange {
-            background-color: #fd7e14;
-        }
-
-        .btn-link.green {
-            background-color: #218838;
+            background-color: var(--ty-secondary); /* 智慧科技藍 */
         }
 
         .badge {
-            background: #e1f5fe;
-            color: #0288d1;
-            padding: 2px 8px;
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--ty-white);
+            padding: 3px 10px;
             border-radius: 12px;
             font-size: 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.4);
         }
 
-        /* Pop-up 視窗 Modal 樣式 (最適緊湊化，去除多餘留白) */
+        /* Modal 彈窗樣式 */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -429,7 +416,7 @@
         .modal-content {
             background: white;
             border-radius: 10px;
-            max-width: 420px; /* 緊湊適中度，防止過度留白 */
+            max-width: 420px;
             width: 100%;
             max-height: 85vh;
             overflow-y: auto;
@@ -439,7 +426,7 @@
         }
 
         .modal-content.wide {
-            max-width: 520px; /* 適用於有備註或較多欄位之 Modal */
+            max-width: 520px;
         }
 
         .modal-header {
@@ -469,7 +456,6 @@
             color: var(--ty-primary);
         }
 
-        /* Modal 專用表格統一欄寬樣式 */
         .modal-table {
             min-width: 100% !important;
             width: 100%;
@@ -482,7 +468,6 @@
             text-align: center;
         }
 
-        /* 手機版響應式微調 */
         @media (max-width: 600px) {
             header h1 {
                 font-size: 1.1rem;
@@ -661,8 +646,8 @@
                             <td><strong>身分證影本 3 份</strong></td>
                             <td><strong>存摺影本 1 份</strong></td>
                             <td><strong>印鑑證明 2 份</strong></td>
-                            <td style="text-align: left; background-color: #fffde7;" rowspan="2">
-                                <strong style="color: #d9534f;">※ 備註：</strong><br>
+                            <td style="text-align: left; background-color: var(--ty-yellow-bg);" rowspan="2">
+                                <strong style="color: var(--ty-primary);">※ 備註：</strong><br>
                                 <span class="highlight-text">※ 文件都不要壓日期！！！</span><br>
                                 <span class="highlight-text">※ 注意是否要騎縫 ⬇</span>
                             </td>
@@ -794,9 +779,9 @@
                         <li><strong>實登委託書</strong></li>
                     </ol>
                 </div>
-                <div class="info-card" style="border-left-color: #d9534f; background-color: #fdf2f2;">
-                    <h3 style="color: #d9534f;">⏰ 3. 成果檢送時程管制</h3>
-                    <p style="font-size: 0.95rem;">用印完成返回後，請預先推算並於 <strong style="color: #d9534f; font-size: 1.1rem;">50 個日曆天內</strong> 檢送成果！</p>
+                <div class="info-card" style="border-left-color: var(--ty-primary); background-color: var(--ty-accent-bg);">
+                    <h3 style="color: var(--ty-primary);">⏰ 3. 成果檢送時程管制</h3>
+                    <p style="font-size: 0.95rem;">用印完成返回後，請預先推算並於 <strong style="color: var(--ty-primary); font-size: 1.1rem;">50 個日曆天內</strong> 檢送成果！</p>
                 </div>
             </div>
         </div>
@@ -845,7 +830,7 @@
                         收件 ➔ 測量 ➔ 登記 ➔ 變更編定登記 ➔ 結案
                     </div>
                     <div class="cut-box">
-                        <strong style="color: #d9534f;">⚠️ 務必再次確認以下重點：</strong>
+                        <strong style="color: var(--ty-primary);">⚠️ 務必再次確認以下重點：</strong>
                         <ul style="padding-left: 1.2rem; margin-top: 4px;">
                             <li>土地分區是否已正確變成<strong>交通用地</strong>。</li>
                             <li>確認<strong>沒有原地主造成的註記</strong>（例如：農舍套繪等）。</li>
@@ -942,7 +927,7 @@
                         </tr>
                         <tr>
                             <td><strong>大溪稅務局</strong></td>
-                            <td><span class="highlight-text">大溪區、龍潭區、複興區</span></td>
+                            <td><span class="highlight-text">大溪區、龍潭區、復興區</span></td>
                             <td>(03) 380-0072<br><small>桃園市大溪區員林路一段16號</small></td>
                             <td>--</td>
                         </tr>
@@ -963,16 +948,16 @@
             </div>
         </div>
 
-        <!-- 步驟 6：送件專區 -->
+        <!-- 步驟 6：送件專區 (已統一按鈕色系，去除過於繽紛的外觀) -->
         <div id="step-6" class="content-panel">
             <div class="panel-header">
                 <h2>步驟 6：送件作業重點</h2>
                 <div class="panel-links-row">
-                    <a href="./tool2/index.html" target="_blank" rel="noopener noreferrer" class="btn-link purple">🧮 連前持分計算</a>
-                    <a href="./tool1/index.html" target="_blank" rel="noopener noreferrer" class="btn-link orange">💰 土地登記規費試算</a>
-                    <a href="https://vlir.land.moi.gov.tw/#" target="_blank" rel="noopener noreferrer" class="btn-link green">🏠 內政部實價登錄網站</a>
+                    <a href="./tool2/index.html" target="_blank" rel="noopener noreferrer" class="btn-link">🧮 連前持分計算</a>
+                    <a href="./tool1/index.html" target="_blank" rel="noopener noreferrer" class="btn-link">💰 土地登記規費試算</a>
+                    <a href="https://vlir.land.moi.gov.tw/#" target="_blank" rel="noopener noreferrer" class="btn-link sec">🏠 內政部實價登錄</a>
                     <a href="https://www.ris.gov.tw/app/portal/3014" target="_blank" rel="noopener noreferrer" class="btn-link sec">🆔 身分證核對工具</a>
-                    <a href="https://land.tycg.gov.tw/News_Link.aspx?n=4142&sms=10098" target="_blank" rel="noopener noreferrer" class="btn-link">🔗 桃園地政局轄區地所連結</a>
+                    <a href="https://land.tycg.gov.tw/News_Link.aspx?n=4142&sms=10098" target="_blank" rel="noopener noreferrer" class="btn-link sec">🔗 桃園地政局轄區地所</a>
                 </div>
             </div>
 
@@ -1195,7 +1180,7 @@
         </div>
     </div>
 
-    <!-- POP-UP MODALS 彈窗區塊 (統一表格寬度與去除無用留白) -->
+    <!-- POP-UP MODALS 彈窗區塊 -->
 
     <!-- 桃園稅務總局 -->
     <div id="modal-tax-ty" class="modal-overlay">
@@ -1244,7 +1229,7 @@
                     <tr><td>黃興龍</td><td>#215</td><td>--</td></tr>
                     <tr><td>陳彥甯</td><td>#216</td><td>--</td></tr>
                     <tr><td>李云</td><td>#217</td><td>--</td></tr>
-                    <tr><td>江美瑤</td><td>--</td><td><span style="color:#28a745; font-weight:bold;">稅單核發很快</span></td></tr>
+                    <tr><td>江美瑤</td><td>--</td><td><span style="color:var(--ty-green); font-weight:bold;">稅單核發很快</span></td></tr>
                 </tbody>
             </table>
         </div>
@@ -1324,7 +1309,6 @@
     <div id="modal-land-ks" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>龜山地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-ks')">&times;</button></div><p style="text-align:center; padding: 10px 0;">登記科審查課分機：<strong>#101 ~ #105</strong></p></div></div>
 
     <script>
-        // 切換頁籤
         function switchStep(stepNumber) {
             const cards = document.querySelectorAll('.step-card');
             cards.forEach((card, index) => {
@@ -1346,7 +1330,6 @@
             }
         }
 
-        // Pop-up Modal 控制
         function openModal(modalId) {
             const target = document.getElementById(modalId);
             if(target) target.classList.add('active');
