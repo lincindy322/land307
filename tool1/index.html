@@ -3,54 +3,72 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>多筆土地登記費計算器</title>
+  <title>土地登記費計算器 (多筆合算)</title>
   <style>
+    :root {
+      --ty-primary: #E6005A;   /* 桃紅 */
+      --ty-secondary: #008080; /* 藍綠 */
+      --ty-dark: #2A2A2A;      
+      --ty-light: #F9F9FB;     
+      --ty-white: #FFFFFF;
+      --ty-gray: #E0E0E0;
+      --ty-accent-bg: #FFF0F5;
+    }
+
     * {
       box-sizing: border-box;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
+
     body {
-      background-color: #f4f6f8;
+      background-color: var(--ty-light);
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       margin: 0;
       padding: 20px;
+      color: var(--ty-dark);
     }
+
     .card {
-      background: #ffffff;
+      background: var(--ty-white);
       padding: 24px;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
       width: 100%;
       max-width: 580px;
+      border-top: 4px solid var(--ty-primary);
     }
+
     h2 {
       margin-top: 0;
       margin-bottom: 20px;
-      color: #2c3e50;
+      color: var(--ty-primary);
       text-align: center;
       font-size: 1.4rem;
     }
+
     .land-item {
-      background: #fafafa;
-      border: 1px solid #e2e8f0;
+      background: var(--ty-light);
+      border: 1px solid var(--ty-gray);
       border-radius: 8px;
       padding: 16px;
       margin-bottom: 16px;
       position: relative;
     }
+
     .land-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 12px;
       font-weight: bold;
-      color: #34495e;
+      color: var(--ty-dark);
     }
+
     .btn-delete {
-      background: #e74c3c;
+      background: #d9534f;
       color: white;
       border: none;
       border-radius: 4px;
@@ -58,94 +76,110 @@
       cursor: pointer;
       font-size: 0.8rem;
     }
+
     .btn-delete:hover {
-      background: #c0392b;
+      background: #c9302c;
     }
+
     .grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
       margin-bottom: 12px;
     }
+
     .form-group {
       margin-bottom: 8px;
     }
+
     label {
       display: block;
       margin-bottom: 4px;
       font-weight: 600;
-      color: #4a5568;
+      color: #555;
       font-size: 0.85rem;
     }
+
     input {
       width: 100%;
       padding: 8px 10px;
-      border: 1px solid #cbd5e0;
+      border: 1px solid var(--ty-gray);
       border-radius: 6px;
       font-size: 0.95rem;
     }
+
     input:focus {
       outline: none;
-      border-color: #3182ce;
+      border-color: var(--ty-primary);
     }
+
     .fraction-group {
       display: flex;
       align-items: center;
       gap: 6px;
     }
+
     .fraction-group span {
       font-size: 1rem;
-      color: #a0aec0;
+      color: #777;
     }
+
     .subtotal-note {
       font-size: 0.8rem;
-      color: #718096;
+      color: #666;
       text-align: right;
       margin-top: 4px;
     }
+
     .btn-add {
       width: 100%;
       padding: 10px;
-      background-color: #f0f4f8;
-      color: #2b6cb0;
-      border: 2px dashed #cbd5e0;
+      background-color: var(--ty-accent-bg);
+      color: var(--ty-primary);
+      border: 2px dashed var(--ty-primary);
       border-radius: 8px;
       font-weight: bold;
       cursor: pointer;
       font-size: 0.95rem;
-      transition: background-color 0.2s;
+      transition: opacity 0.2s;
     }
+
     .btn-add:hover {
-      background-color: #e2e8f0;
+      opacity: 0.85;
     }
+
     .result-box {
       margin-top: 24px;
       padding: 18px;
-      background-color: #eef9f5;
-      border: 1px solid #c2e1d5;
+      background-color: #f0fdf4;
+      border: 1px solid #bbf7d0;
       border-radius: 8px;
       text-align: center;
     }
+
     .result-title {
       font-size: 0.95rem;
-      color: #27ae60;
+      color: #16a34a;
       margin-bottom: 4px;
       font-weight: 600;
     }
+
     .result-value-main {
       font-size: 2.2rem;
       font-weight: bold;
-      color: #1e824c;
+      color: #15803d;
       line-height: 1.2;
     }
+
     .result-value-raw {
       font-size: 0.85rem;
-      color: #7f8c8d;
+      color: #6b7280;
       margin-top: 6px;
     }
+
     .formula-note {
       font-size: 0.8rem;
-      color: #a0aec0;
+      color: #888;
       margin-top: 16px;
       text-align: center;
     }
@@ -156,13 +190,10 @@
 <div class="card">
   <h2>土地登記費計算器 (多筆合算)</h2>
 
-  <!-- 土地明細清單區塊 -->
   <div id="land-list"></div>
 
-  <!-- 新增土地按鈕 -->
   <button class="btn-add" onclick="addLand()">+ 新增一筆土地</button>
 
-  <!-- 計算總結果 -->
   <div class="result-box">
     <div class="result-title">案件總登記費 (整案加總後無條件捨去)</div>
     <div class="result-value-main" id="result-main">NT$ 0</div>
@@ -177,12 +208,10 @@
 <script>
   let landCount = 0;
 
-  // 頁面載入時預設新增一筆土地
   window.onload = function() {
     addLand();
   };
 
-  // 動態新增土地區塊
   function addLand() {
     landCount++;
     const id = landCount;
@@ -222,7 +251,6 @@
     calculate();
   }
 
-  // 刪除指定土地區塊
   function removeLand(id) {
     const item = document.getElementById(`land-${id}`);
     if (item) {
@@ -231,7 +259,6 @@
     }
   }
 
-  // 重新計算全部金額
   function calculate() {
     const items = document.querySelectorAll('.land-item');
     let grandTotalRaw = 0;
@@ -248,18 +275,16 @@
 
       if (denominator === 0) {
         subtotalNote.innerText = '錯誤：分母不可為 0';
-        subtotalNote.style.color = '#e74c3c';
+        subtotalNote.style.color = '#d9534f';
         hasError = true;
         return;
       } else {
-        subtotalNote.style.color = '#718096';
+        subtotalNote.style.color = '#666';
       }
 
-      // 單筆精確計算結果 (不捨去)
       const rawSubtotal = price * area * (numerator / denominator) * 0.001;
       grandTotalRaw += rawSubtotal;
 
-      // 顯示單筆的未捨去試算金額 (保留到小數點後 2 位)
       subtotalNote.innerText = `本筆試算：NT$ ${rawSubtotal.toLocaleString('zh-TW', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}`;
     });
 
@@ -269,10 +294,8 @@
       return;
     }
 
-    // 將所有土地加總後的總額進行「無條件捨去」
     const grandTotalFloor = Math.floor(grandTotalRaw);
 
-    // 格式化輸出
     document.getElementById('result-main').innerText = `NT$ ${grandTotalFloor.toLocaleString('zh-TW')}`;
 
     const formattedRaw = Number.isInteger(grandTotalRaw)
