@@ -192,7 +192,7 @@
 
         .info-card {
             background: var(--ty-light);
-            border-left: 4px solid var(--ty-primary); /* 桃紅色側邊 */
+            border-left: 4px solid var(--ty-primary);
             padding: 1.2rem;
             border-radius: 6px;
         }
@@ -266,7 +266,7 @@
             width: 15%;
         }
 
-        /* 直式流程卡片 (步驟四 - 桃紅邊條) */
+        /* 直式流程卡片 (步驟四) */
         .flow-vertical-container {
             max-width: 750px;
             margin: 1rem auto;
@@ -278,7 +278,7 @@
         .flow-v-step {
             background: var(--ty-light);
             border: 1px solid var(--ty-gray);
-            border-left: 5px solid var(--ty-primary); /* 桃紅色側邊 */
+            border-left: 5px solid var(--ty-primary);
             border-radius: 8px;
             padding: 1.2rem;
             position: relative;
@@ -403,7 +403,7 @@
             font-size: 0.8rem;
         }
 
-        /* Pop-up 視窗 Modal 樣式 */
+        /* Pop-up 視窗 Modal 樣式 (最適緊湊化，去除多餘留白) */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -429,13 +429,17 @@
         .modal-content {
             background: white;
             border-radius: 10px;
-            max-width: 600px;
+            max-width: 420px; /* 緊湊適中度，防止過度留白 */
             width: 100%;
             max-height: 85vh;
             overflow-y: auto;
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            padding: 1.5rem;
+            padding: 1.2rem;
             position: relative;
+        }
+
+        .modal-content.wide {
+            max-width: 520px; /* 適用於有備註或較多欄位之 Modal */
         }
 
         .modal-header {
@@ -443,13 +447,13 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 2px solid var(--ty-primary);
-            padding-bottom: 0.6rem;
-            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
         }
 
         .modal-header h3 {
             color: var(--ty-primary);
-            font-size: 1.2rem;
+            font-size: 1.15rem;
         }
 
         .modal-close {
@@ -463,6 +467,19 @@
 
         .modal-close:hover {
             color: var(--ty-primary);
+        }
+
+        /* Modal 專用表格統一欄寬樣式 */
+        .modal-table {
+            min-width: 100% !important;
+            width: 100%;
+            margin-top: 0;
+        }
+
+        .modal-table th, .modal-table td {
+            padding: 8px 10px;
+            font-size: 0.9rem;
+            text-align: center;
         }
 
         /* 手機版響應式微調 */
@@ -497,7 +514,7 @@
     </header>
 
     <div class="container">
-        <!-- 8步驟橫條頁籤 (寬度與內容卡片完全對齊) -->
+        <!-- 8步驟橫條頁籤 -->
         <div class="step-navigation">
             <div class="step-card active" onclick="switchStep(1)">
                 <div class="step-number">Step 01</div>
@@ -784,7 +801,7 @@
             </div>
         </div>
 
-        <!-- 步驟 4：變更編定 + 分割 (側邊改為桃紅色邊條) -->
+        <!-- 步驟 4：變更編定 + 分割 -->
         <div id="step-4" class="content-panel">
             <div class="panel-header">
                 <h2>步驟 4：變更編定與分割作業流程</h2>
@@ -821,7 +838,6 @@
 
                 <div class="flow-v-arrow">⬇️</div>
 
-                <!-- 修正：側邊邊條改為桃紅色 (var(--ty-primary)) -->
                 <div class="flow-v-step" style="border-left-color: var(--ty-primary);">
                     <h3>4. 地政事務所辦理分割程序</h3>
                     <p style="font-size: 0.92rem;"><strong>標準作業程序：</strong></p>
@@ -926,7 +942,7 @@
                         </tr>
                         <tr>
                             <td><strong>大溪稅務局</strong></td>
-                            <td><span class="highlight-text">大溪區、龍潭區、復興區</span></td>
+                            <td><span class="highlight-text">大溪區、龍潭區、複興區</span></td>
                             <td>(03) 380-0072<br><small>桃園市大溪區員林路一段16號</small></td>
                             <td>--</td>
                         </tr>
@@ -947,7 +963,7 @@
             </div>
         </div>
 
-        <!-- 步驟 6：送件專區 (已調整欄寬、修正錯字與補充大溪轄區，筆電不換行) -->
+        <!-- 步驟 6：送件專區 -->
         <div id="step-6" class="content-panel">
             <div class="panel-header">
                 <h2>步驟 6：送件作業重點</h2>
@@ -983,12 +999,9 @@
                     <thead>
                         <tr>
                             <th style="width: 15%;">地政事務所</th>
-                            <!-- 轄區加寬並加強強制不換行 (white-space: nowrap) -->
                             <th style="width: 22%; white-space: nowrap;">轄區</th>
-                            <!-- 地址電話適度縮窄 -->
                             <th style="width: 20%;">地址與電話</th>
                             <th style="width: 13%;">審查分機</th>
-                            <!-- 送件注意事項加寬 -->
                             <th style="width: 30%;">送件注意事項</th>
                         </tr>
                     </thead>
@@ -1036,7 +1049,6 @@
                         </tr>
                         <tr>
                             <td><strong>大溪地政事務所</strong></td>
-                            <!-- 修正錯字「復興」與補齊完整轄區名稱，設定 white-space: nowrap 筆電不上鎖折行 -->
                             <td style="white-space: nowrap;">大溪區、復興區、龍潭區</td>
                             <td>(03) 388-3161<br><small>大溪區員林路一段189號</small></td>
                             <td><button class="btn-link sec" onclick="openModal('modal-land-dx')">📞 #102~108</button></td>
@@ -1061,7 +1073,7 @@
             </div>
         </div>
 
-        <!-- 步驟 7：領件 (側邊改為桃紅色邊條) -->
+        <!-- 步驟 7：領件 -->
         <div id="step-7" class="content-panel">
             <div class="panel-header">
                 <h2>步驟 7：領件與進度查詢</h2>
@@ -1080,7 +1092,6 @@
                     </ul>
                 </div>
 
-                <!-- 修正：邊條改為桃紅色 (var(--ty-primary)) -->
                 <div class="info-card" style="border-left-color: var(--ty-primary);">
                     <h3>📦 領件注意事項</h3>
                     <ol>
@@ -1184,7 +1195,7 @@
         </div>
     </div>
 
-    <!-- POP-UP MODALS 彈窗區塊 -->
+    <!-- POP-UP MODALS 彈窗區塊 (統一表格寬度與去除無用留白) -->
 
     <!-- 桃園稅務總局 -->
     <div id="modal-tax-ty" class="modal-overlay">
@@ -1193,53 +1204,49 @@
                 <h3>📞 桃園稅務總局 承辦分機</h3>
                 <button class="modal-close" onclick="closeModal('modal-tax-ty')">&times;</button>
             </div>
-            <div class="table-responsive">
-                <table>
-                    <thead><tr><th>承辦人員</th><th>分機</th></tr></thead>
-                    <tbody>
-                        <tr><td>朱百琪</td><td>#2753</td></tr>
-                        <tr><td>沈宛臻</td><td>#2753</td></tr>
-                        <tr><td>楊念蓁</td><td>#2754</td></tr>
-                        <tr><td>黃郁涵</td><td>#2755</td></tr>
-                        <tr><td>王品雅</td><td>#2756</td></tr>
-                        <tr><td>何韶婷</td><td>#2757</td></tr>
-                        <tr><td>葉貞江</td><td>#2762</td></tr>
-                        <tr><td>林佩青</td><td>#2763</td></tr>
-                        <tr><td>賴霈裕</td><td>#2764</td></tr>
-                        <tr><td>藍秀慈</td><td>#2764</td></tr>
-                        <tr><td>詹文嘉</td><td>#2767</td></tr>
-                    </tbody>
-                </table>
-            </div>
+            <table class="modal-table">
+                <thead><tr><th style="width: 50%;">承辦人員</th><th style="width: 50%;">分機</th></tr></thead>
+                <tbody>
+                    <tr><td>朱百琪</td><td>#2753</td></tr>
+                    <tr><td>沈宛臻</td><td>#2753</td></tr>
+                    <tr><td>楊念蓁</td><td>#2754</td></tr>
+                    <tr><td>黃郁涵</td><td>#2755</td></tr>
+                    <tr><td>王品雅</td><td>#2756</td></tr>
+                    <tr><td>何韶婷</td><td>#2757</td></tr>
+                    <tr><td>葉貞江</td><td>#2762</td></tr>
+                    <tr><td>林佩青</td><td>#2763</td></tr>
+                    <tr><td>賴霈裕</td><td>#2764</td></tr>
+                    <tr><td>藍秀慈</td><td>#2764</td></tr>
+                    <tr><td>詹文嘉</td><td>#2767</td></tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
     <!-- 中壢稅務局 -->
     <div id="modal-tax-zl" class="modal-overlay">
-        <div class="modal-content">
+        <div class="modal-content wide">
             <div class="modal-header">
                 <h3>📞 中壢稅務局 承辦分機</h3>
                 <button class="modal-close" onclick="closeModal('modal-tax-zl')">&times;</button>
             </div>
-            <div class="table-responsive">
-                <table>
-                    <thead><tr><th>承辦人員</th><th>分機</th><th>備註提醒</th></tr></thead>
-                    <tbody>
-                        <tr><td>李千有</td><td>#205</td><td>--</td></tr>
-                        <tr><td>吳亞芸</td><td>#205</td><td>--</td></tr>
-                        <tr><td>潘姿妏</td><td>#207</td><td><span class="yellow-highlight">記得要一直催稅單</span></td></tr>
-                        <tr><td>林承志</td><td>#208</td><td>--</td></tr>
-                        <tr><td>黃思涵</td><td>#208</td><td>--</td></tr>
-                        <tr><td>楊立嶕</td><td>#209</td><td>--</td></tr>
-                        <tr><td>李崔琳</td><td>#211</td><td>--</td></tr>
-                        <tr><td>葉庭豪</td><td>#215</td><td><span class="yellow-highlight">申請稅單動作很慢</span></td></tr>
-                        <tr><td>黃興龍</td><td>#215</td><td>--</td></tr>
-                        <tr><td>陳彥甯</td><td>#216</td><td>--</td></tr>
-                        <tr><td>李云</td><td>#217</td><td>--</td></tr>
-                        <tr><td>江美瑤</td><td>--</td><td><span style="color:#28a745; font-weight:bold;">稅單核發很快</span></td></tr>
-                    </tbody>
-                </table>
-            </div>
+            <table class="modal-table">
+                <thead><tr><th style="width: 30%;">承辦人員</th><th style="width: 25%;">分機</th><th style="width: 45%;">備註提醒</th></tr></thead>
+                <tbody>
+                    <tr><td>李千有</td><td>#205</td><td>--</td></tr>
+                    <tr><td>吳亞芸</td><td>#205</td><td>--</td></tr>
+                    <tr><td>潘姿妏</td><td>#207</td><td><span class="yellow-highlight">記得要一直催稅單</span></td></tr>
+                    <tr><td>林承志</td><td>#208</td><td>--</td></tr>
+                    <tr><td>黃思涵</td><td>#208</td><td>--</td></tr>
+                    <tr><td>楊立嶕</td><td>#209</td><td>--</td></tr>
+                    <tr><td>李崔琳</td><td>#211</td><td>--</td></tr>
+                    <tr><td>葉庭豪</td><td>#215</td><td><span class="yellow-highlight">申請稅單動作很慢</span></td></tr>
+                    <tr><td>黃興龍</td><td>#215</td><td>--</td></tr>
+                    <tr><td>陳彥甯</td><td>#216</td><td>--</td></tr>
+                    <tr><td>李云</td><td>#217</td><td>--</td></tr>
+                    <tr><td>江美瑤</td><td>--</td><td><span style="color:#28a745; font-weight:bold;">稅單核發很快</span></td></tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
@@ -1250,14 +1257,12 @@
                 <h3>📞 楊梅稅務局 承辦分機</h3>
                 <button class="modal-close" onclick="closeModal('modal-tax-ym')">&times;</button>
             </div>
-            <div class="table-responsive">
-                <table>
-                    <thead><tr><th>承辦人員</th><th>分機</th></tr></thead>
-                    <tbody>
-                        <tr><td>陳映竹</td><td>#106</td></tr>
-                    </tbody>
-                </table>
-            </div>
+            <table class="modal-table">
+                <thead><tr><th style="width: 50%;">承辦人員</th><th style="width: 50%;">分機</th></tr></thead>
+                <tbody>
+                    <tr><td>陳映竹</td><td>#106</td></tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
@@ -1268,16 +1273,14 @@
                 <h3>📞 蘆竹稅務局 承辦分機</h3>
                 <button class="modal-close" onclick="closeModal('modal-tax-lz')">&times;</button>
             </div>
-            <div class="table-responsive">
-                <table>
-                    <thead><tr><th>承辦人員</th><th>分機</th></tr></thead>
-                    <tbody>
-                        <tr><td>許麗娟</td><td>#125</td></tr>
-                        <tr><td>鍾孟蓉</td><td>--</td></tr>
-                        <tr><td>范雅婷</td><td>#126</td></tr>
-                    </tbody>
-                </table>
-            </div>
+            <table class="modal-table">
+                <thead><tr><th style="width: 50%;">承辦人員</th><th style="width: 50%;">分機</th></tr></thead>
+                <tbody>
+                    <tr><td>許麗娟</td><td>#125</td></tr>
+                    <tr><td>鍾孟蓉</td><td>--</td></tr>
+                    <tr><td>范雅婷</td><td>#126</td></tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
@@ -1288,39 +1291,37 @@
                 <h3>📞 平鎮地政事務所 審查分機表</h3>
                 <button class="modal-close" onclick="closeModal('modal-land-pz')">&times;</button>
             </div>
-            <div class="table-responsive">
-                <table>
-                    <thead><tr><th>類別</th><th>人員</th><th>分機</th></tr></thead>
-                    <tbody>
-                        <tr><td rowspan="2">複審</td><td>朱佩琪</td><td>103</td></tr>
-                        <tr><td>鄒貴嬌</td><td>105</td></tr>
-                        <tr><td rowspan="9">初審</td><td>吳貴博</td><td>116</td></tr>
-                        <tr><td>柯雅美</td><td>114</td></tr>
-                        <tr><td>呂季燕</td><td>104</td></tr>
-                        <tr><td>吳佩儒</td><td>106</td></tr>
-                        <tr><td>（初審）</td><td>107</td></tr>
-                        <tr><td>陳建達</td><td>112</td></tr>
-                        <tr><td>範志中</td><td>111</td></tr>
-                        <tr><td>劉麗卿</td><td>128</td></tr>
-                        <tr><td>林君諺</td><td>127</td></tr>
-                        <tr><td>單一</td><td>葉婉琳</td><td>102</td></tr>
-                        <tr><td rowspan="2">校對</td><td>黃政榮</td><td>115</td></tr>
-                        <tr><td>白薏萱</td><td>117</td></tr>
-                        <tr><td>未辦繼承</td><td>方准親</td><td>123</td></tr>
-                    </tbody>
-                </table>
-            </div>
+            <table class="modal-table">
+                <thead><tr><th style="width: 30%;">類別</th><th style="width: 35%;">人員</th><th style="width: 35%;">分機</th></tr></thead>
+                <tbody>
+                    <tr><td rowspan="2">複審</td><td>朱佩琪</td><td>103</td></tr>
+                    <tr><td>鄒貴嬌</td><td>105</td></tr>
+                    <tr><td rowspan="9">初審</td><td>吳貴博</td><td>116</td></tr>
+                    <tr><td>柯雅美</td><td>114</td></tr>
+                    <tr><td>呂季燕</td><td>104</td></tr>
+                    <tr><td>吳佩儒</td><td>106</td></tr>
+                    <tr><td>（初審）</td><td>107</td></tr>
+                    <tr><td>陳建達</td><td>112</td></tr>
+                    <tr><td>範志中</td><td>111</td></tr>
+                    <tr><td>劉麗卿</td><td>128</td></tr>
+                    <tr><td>林君諺</td><td>127</td></tr>
+                    <tr><td>單一</td><td>葉婉琳</td><td>102</td></tr>
+                    <tr><td rowspan="2">校對</td><td>黃政榮</td><td>115</td></tr>
+                    <tr><td>白薏萱</td><td>117</td></tr>
+                    <tr><td>未辦繼承</td><td>方准親</td><td>123</td></tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
     <!-- 通用簡易地所 Modals -->
-    <div id="modal-land-ty" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>桃園地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-ty')">&times;</button></div><p>登記科審查課分機：<strong>#102 ~ #115</strong></p></div></div>
-    <div id="modal-land-zl" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>中壢地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-zl')">&times;</button></div><p>登記科審查課分機：<strong>#105 ~ #118</strong></p></div></div>
-    <div id="modal-land-ym" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>楊梅地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-ym')">&times;</button></div><p>登記科審查課分機：<strong>#101 ~ #106</strong></p></div></div>
-    <div id="modal-land-lz" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>蘆竹地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-lz')">&times;</button></div><p>登記科審查課分機：<strong>#111 ~ #116</strong></p></div></div>
-    <div id="modal-land-dx" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>大溪地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-dx')">&times;</button></div><p>登記科審查課分機：<strong>#102 ~ #108</strong></p></div></div>
-    <div id="modal-land-bd" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>八德地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-bd')">&times;</button></div><p>登記科審查課分機：<strong>#101 ~ #105</strong></p></div></div>
-    <div id="modal-land-ks" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>龜山地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-ks')">&times;</button></div><p>登記科審查課分機：<strong>#101 ~ #105</strong></p></div></div>
+    <div id="modal-land-ty" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>桃園地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-ty')">&times;</button></div><p style="text-align:center; padding: 10px 0;">登記科審查課分機：<strong>#102 ~ #115</strong></p></div></div>
+    <div id="modal-land-zl" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>中壢地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-zl')">&times;</button></div><p style="text-align:center; padding: 10px 0;">登記科審查課分機：<strong>#105 ~ #118</strong></p></div></div>
+    <div id="modal-land-ym" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>楊梅地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-ym')">&times;</button></div><p style="text-align:center; padding: 10px 0;">登記科審查課分機：<strong>#101 ~ #106</strong></p></div></div>
+    <div id="modal-land-lz" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>蘆竹地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-lz')">&times;</button></div><p style="text-align:center; padding: 10px 0;">登記科審查課分機：<strong>#111 ~ #116</strong></p></div></div>
+    <div id="modal-land-dx" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>大溪地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-dx')">&times;</button></div><p style="text-align:center; padding: 10px 0;">登記科審查課分機：<strong>#102 ~ #108</strong></p></div></div>
+    <div id="modal-land-bd" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>八德地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-bd')">&times;</button></div><p style="text-align:center; padding: 10px 0;">登記科審查課分機：<strong>#101 ~ #105</strong></p></div></div>
+    <div id="modal-land-ks" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>龜山地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-ks')">&times;</button></div><p style="text-align:center; padding: 10px 0;">登記科審查課分機：<strong>#101 ~ #105</strong></p></div></div>
 
     <script>
         // 切換頁籤
