@@ -356,7 +356,7 @@
             line-height: 1.6;
         }
 
-        /* 統一按鈕視覺設計 (主色桃紅、輔助科技藍) */
+        /* 統一按鈕視覺設計 */
         .btn-link {
             display: inline-flex;
             align-items: center;
@@ -929,7 +929,7 @@
                             <td><strong>大溪稅務局</strong></td>
                             <td><span class="highlight-text">大溪區、龍潭區、復興區</span></td>
                             <td>(03) 380-0072<br><small>桃園市大溪區員林路一段16號</small></td>
-                            <td>--</td>
+                            <td><button class="btn-link sec" onclick="openModal('modal-tax-dx-tax')">📞 查看分機</button></td>
                         </tr>
                         <tr>
                             <td><strong>楊梅稅務局</strong></td>
@@ -948,7 +948,7 @@
             </div>
         </div>
 
-        <!-- 步驟 6：送件專區 (已統一按鈕色系，去除過於繽紛的外觀) -->
+        <!-- 步驟 6：送件專區 -->
         <div id="step-6" class="content-panel">
             <div class="panel-header">
                 <h2>步驟 6：送件作業重點</h2>
@@ -965,7 +965,7 @@
                 <div class="info-card">
                     <h3>📝 1. 申報實價登錄</h3>
                     <ul>
-                        <li><strong>特殊交易標的：</strong>若包含「公共設施保留地（用地）」，當都市計畫內有載明時，<span class="highlight-text">一定要勾選</span>。</li>
+                        <li><strong>特殊交易標的：</strong>若包含<span>「公共設施保留地（用地）」</span>，當都市計畫內有載明時，<span class="highlight-text">一定要勾選</span>。</li>
                         <li><strong>地號輸入：</strong>協議價購已有價購清冊，<span class="highlight-text">不須分別打地號</span>。</li>
                     </ul>
                 </div>
@@ -1180,7 +1180,7 @@
         </div>
     </div>
 
-    <!-- POP-UP MODALS 彈窗區塊 -->
+    <!-- POP-UP MODALS 彈窗區塊 (分類內部已完全按分機由小到大排序) -->
 
     <!-- 桃園稅務總局 -->
     <div id="modal-tax-ty" class="modal-overlay">
@@ -1202,6 +1202,7 @@
                     <tr><td>林佩青</td><td>#2763</td></tr>
                     <tr><td>賴霈裕</td><td>#2764</td></tr>
                     <tr><td>藍秀慈</td><td>#2764</td></tr>
+                    <tr><td>李維康</td><td>#2765</td></tr>
                     <tr><td>詹文嘉</td><td>#2767</td></tr>
                 </tbody>
             </table>
@@ -1223,13 +1224,35 @@
                     <tr><td>潘姿妏</td><td>#207</td><td><span class="yellow-highlight">記得要一直催稅單</span></td></tr>
                     <tr><td>林承志</td><td>#208</td><td>--</td></tr>
                     <tr><td>黃思涵</td><td>#208</td><td>--</td></tr>
-                    <tr><td>楊立嶕</td><td>#209</td><td>--</td></tr>
+                    <tr><td>楊立嶂</td><td>#209</td><td>--</td></tr>
                     <tr><td>李崔琳</td><td>#211</td><td>--</td></tr>
+                    <tr><td>黃雅琪</td><td>#211</td><td>--</td></tr>
                     <tr><td>葉庭豪</td><td>#215</td><td><span class="yellow-highlight">申請稅單動作很慢</span></td></tr>
                     <tr><td>黃興龍</td><td>#215</td><td>--</td></tr>
                     <tr><td>陳彥甯</td><td>#216</td><td>--</td></tr>
                     <tr><td>李云</td><td>#217</td><td>--</td></tr>
                     <tr><td>江美瑤</td><td>--</td><td><span style="color:var(--ty-green); font-weight:bold;">稅單核發很快</span></td></tr>
+                    <tr><td>黃倩寧</td><td>--</td><td>--</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 大溪稅務局 -->
+    <div id="modal-tax-dx-tax" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>📞 大溪稅務局 承辦分機</h3>
+                <button class="modal-close" onclick="closeModal('modal-tax-dx-tax')">&times;</button>
+            </div>
+            <table class="modal-table">
+                <thead><tr><th style="width: 50%;">承辦人員</th><th style="width: 50%;">分機</th></tr></thead>
+                <tbody>
+                    <tr><td>彭芷葳</td><td>#112</td></tr>
+                    <tr><td>陳韻安</td><td>#113</td></tr>
+                    <tr><td>邱婕閩</td><td>#121</td></tr>
+                    <tr><td>許至谷</td><td>--</td></tr>
+                    <tr><td>郭如萍</td><td>--</td></tr>
                 </tbody>
             </table>
         </div>
@@ -1245,7 +1268,14 @@
             <table class="modal-table">
                 <thead><tr><th style="width: 50%;">承辦人員</th><th style="width: 50%;">分機</th></tr></thead>
                 <tbody>
+                    <tr><td>鍾禪黛</td><td>#104</td></tr>
+                    <tr><td>賴啟豪</td><td>#105</td></tr>
                     <tr><td>陳映竹</td><td>#106</td></tr>
+                    <tr><td>張珈瑄</td><td>#107</td></tr>
+                    <tr><td>黃美甄</td><td>#107</td></tr>
+                    <tr><td>曾雅凰</td><td>#108</td></tr>
+                    <tr><td>謝心慧</td><td>#109</td></tr>
+                    <tr><td>吳郁瑩</td><td>#121</td></tr>
                 </tbody>
             </table>
         </div>
@@ -1261,15 +1291,21 @@
             <table class="modal-table">
                 <thead><tr><th style="width: 50%;">承辦人員</th><th style="width: 50%;">分機</th></tr></thead>
                 <tbody>
+                    <tr><td>詹琪雯</td><td>#123</td></tr>
+                    <tr><td>白佳蕙</td><td>#124</td></tr>
                     <tr><td>許麗娟</td><td>#125</td></tr>
-                    <tr><td>鍾孟蓉</td><td>--</td></tr>
                     <tr><td>范雅婷</td><td>#126</td></tr>
+                    <tr><td>林軒羽</td><td>#127</td></tr>
+                    <tr><td>鍾孟蓉</td><td>--</td></tr>
+                    <tr><td>曾芳苓</td><td>--</td></tr>
+                    <tr><td>謝逸芝</td><td>--</td></tr>
+                    <tr><td>莊雅文</td><td>--</td></tr>
                 </tbody>
             </table>
         </div>
     </div>
 
-    <!-- 平鎮地政事務所 -->
+    <!-- 平鎮地政事務所 (已嚴格按分類內分機由小到大排序) -->
     <div id="modal-land-pz" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
@@ -1281,15 +1317,16 @@
                 <tbody>
                     <tr><td rowspan="2">複審</td><td>朱佩琪</td><td>103</td></tr>
                     <tr><td>鄒貴嬌</td><td>105</td></tr>
-                    <tr><td rowspan="9">初審</td><td>吳貴博</td><td>116</td></tr>
-                    <tr><td>柯雅美</td><td>114</td></tr>
+                    <tr><td rowspan="9">初審</td><td>葉婉琳</td><td>102</td></tr>
                     <tr><td>呂季燕</td><td>104</td></tr>
                     <tr><td>吳佩儒</td><td>106</td></tr>
                     <tr><td>（初審）</td><td>107</td></tr>
-                    <tr><td>陳建達</td><td>112</td></tr>
                     <tr><td>範志中</td><td>111</td></tr>
-                    <tr><td>劉麗卿</td><td>128</td></tr>
+                    <tr><td>陳建達</td><td>112</td></tr>
+                    <tr><td>柯雅美</td><td>114</td></tr>
+                    <tr><td>吳貴博</td><td>116</td></tr>
                     <tr><td>林君諺</td><td>127</td></tr>
+                    <tr><td>劉麗卿</td><td>128</td></tr>
                     <tr><td>單一</td><td>葉婉琳</td><td>102</td></tr>
                     <tr><td rowspan="2">校對</td><td>黃政榮</td><td>115</td></tr>
                     <tr><td>白薏萱</td><td>117</td></tr>
