@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>桃園協議價購案件辦理流程與聯絡資訊</title>
+    <title>徐瑛宜地政事務所—桃園協議價購案件辦理流程</title>
     <style>
         :root {
             --ty-primary: #E6005A;   /* 桃紅 */
@@ -13,6 +13,8 @@
             --ty-white: #FFFFFF;
             --ty-gray: #E0E0E0;
             --ty-accent-bg: #FFF0F5;
+            --ty-yellow-bg: #fff3cd;  /* 切結黃底背景 */
+            --ty-yellow-border: #ffc107;
         }
 
         * {
@@ -32,15 +34,17 @@
         header {
             background-color: var(--ty-primary);
             color: var(--ty-white);
-            padding: 1rem 2rem;
+            padding: 1rem 1.5rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         header h1 {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -48,30 +52,34 @@
 
         .container {
             max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
         }
 
-        /* 步驟導覽列 */
+        /* 步驟導覽列 (與下方欄位寬度一致) */
         .step-navigation {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             overflow-x: auto;
-            padding-bottom: 1rem;
-            margin-bottom: 2rem;
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.5rem;
             scrollbar-width: thin;
+            -webkit-overflow-scrolling: touch;
+            max-width: 1200px;
+            width: 100%;
         }
 
         .step-card {
-            flex: 0 0 130px;
+            flex: 1;
+            min-width: 110px;
             background: var(--ty-white);
             border: 2px solid var(--ty-gray);
             border-radius: 8px;
-            padding: 12px;
+            padding: 10px 6px;
             text-align: center;
             cursor: pointer;
             transition: all 0.2s ease;
-            position: relative;
+            user-select: none;
         }
 
         .step-card:hover {
@@ -86,19 +94,19 @@
         }
 
         .step-number {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: bold;
-            opacity: 0.8;
-            margin-bottom: 4px;
+            opacity: 0.85;
+            margin-bottom: 2px;
         }
 
         .step-title {
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 600;
         }
 
         .optional-tag {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: #d9534f;
             background: #fdf2f2;
             border-radius: 4px;
@@ -116,42 +124,75 @@
         .content-panel {
             background: var(--ty-white);
             border-radius: 12px;
-            padding: 2rem;
+            padding: 1.5rem;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
             display: none;
+            max-width: 1200px;
+            width: 100%;
         }
 
         .content-panel.active {
             display: block;
         }
 
+        /* 標題與按鈕區塊 */
         .panel-header {
             border-bottom: 2px solid var(--ty-primary);
-            padding-bottom: 1rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 10px;
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.2rem;
         }
 
         .panel-header h2 {
             color: var(--ty-primary);
-            font-size: 1.6rem;
+            font-size: 1.4rem;
+            margin-bottom: 0.6rem;
         }
 
-        /* 聯絡與注意事項卡片樣式 */
+        .panel-links-row {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 0.4rem;
+        }
+
+        /* 統一黃底切結卡片樣式 */
+        .cut-box {
+            background: var(--ty-yellow-bg);
+            border-left: 4px solid var(--ty-yellow-border);
+            padding: 8px 12px;
+            margin-top: 6px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: #856404;
+            line-height: 1.6;
+        }
+
+        .highlight-text {
+            color: #d9534f;
+            font-weight: bold;
+        }
+
+        .yellow-highlight {
+            background-color: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #856404;
+            font-weight: bold;
+        }
+
+        /* 資訊網格排版 */
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 1.5rem;
         }
 
         .info-card {
             background: var(--ty-light);
-            border-left: 4px solid var(--ty-primary);
+            border-left: 4px solid var(--ty-primary); /* 桃紅色側邊 */
             padding: 1.2rem;
             border-radius: 6px;
         }
@@ -159,7 +200,7 @@
         .info-card h3 {
             margin-bottom: 0.8rem;
             color: var(--ty-primary);
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -171,31 +212,39 @@
 
         .info-card li {
             margin-bottom: 0.5rem;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
         }
 
-        /* 表格樣式 */
+        /* 表格 RWD 包裹區 */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 1rem;
+            -webkit-overflow-scrolling: touch;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 1rem;
+            min-width: 650px;
         }
 
         th, td {
             border: 1px solid var(--ty-gray);
             padding: 10px 12px;
             text-align: left;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
         }
 
         th {
             background-color: var(--ty-accent-bg);
             color: var(--ty-primary);
+            white-space: nowrap;
         }
 
-        /* 簽約檢核表專用表格樣式 */
+        /* 簽約檢核表樣式 */
         .check-table {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             border: 2px solid var(--ty-primary);
         }
 
@@ -203,7 +252,6 @@
             background-color: var(--ty-primary);
             color: white;
             text-align: center;
-            font-size: 1.05rem;
         }
 
         .check-table td {
@@ -215,35 +263,43 @@
             background-color: #f5f5f5;
             font-weight: bold;
             color: var(--ty-dark);
-            width: 12%;
+            width: 15%;
         }
 
-        /* 流程步驟專用視覺化區塊 */
-        .flow-step-box {
+        /* 直式流程卡片 (步驟四 - 桃紅邊條) */
+        .flow-vertical-container {
+            max-width: 750px;
+            margin: 1rem auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .flow-v-step {
             background: var(--ty-light);
             border: 1px solid var(--ty-gray);
+            border-left: 5px solid var(--ty-primary); /* 桃紅色側邊 */
             border-radius: 8px;
             padding: 1.2rem;
-            margin-bottom: 1rem;
             position: relative;
         }
 
-        .flow-step-box h3 {
+        .flow-v-step h3 {
             color: var(--ty-primary);
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
+            margin-bottom: 0.4rem;
         }
 
-        .flow-arrow {
+        .flow-v-arrow {
             text-align: center;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: var(--ty-primary);
-            margin: 0.5rem 0;
+            line-height: 1;
         }
 
         /* 可折疊 Q&A 樣式 */
         .qa-section {
-            margin-top: 2rem;
+            margin-top: 1.5rem;
             border: 1px solid var(--ty-gray);
             border-radius: 8px;
             overflow: hidden;
@@ -253,18 +309,14 @@
         .qa-header-title {
             background-color: var(--ty-accent-bg);
             color: var(--ty-primary);
-            padding: 1rem;
-            font-size: 1.2rem;
+            padding: 0.9rem 1rem;
+            font-size: 1.1rem;
             font-weight: bold;
             border-bottom: 1px solid var(--ty-gray);
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
         details.qa-item {
             border-bottom: 1px solid var(--ty-gray);
-            transition: background 0.2s;
         }
 
         details.qa-item:last-child {
@@ -272,7 +324,7 @@
         }
 
         details.qa-item summary {
-            padding: 1rem;
+            padding: 0.9rem 1rem;
             font-weight: bold;
             cursor: pointer;
             color: var(--ty-dark);
@@ -280,7 +332,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: var(--ty-white);
         }
 
         details.qa-item summary:hover {
@@ -290,7 +341,7 @@
 
         details.qa-item summary::after {
             content: "➕";
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--ty-primary);
         }
 
@@ -299,120 +350,154 @@
         }
 
         .qa-answer {
-            padding: 1rem 1.2rem;
+            padding: 0.9rem 1.2rem;
             background-color: #fafafa;
             border-top: 1px dashed var(--ty-gray);
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             color: #444;
-            line-height: 1.7;
+            line-height: 1.6;
         }
 
-        /* 按鈕樣式 */
+        /* 按鈕與 Pop-up 觸發按鈕 */
         .btn-link {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
             background-color: var(--ty-primary);
             color: white;
-            padding: 8px 16px;
+            padding: 6px 14px;
             text-decoration: none;
             border-radius: 4px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            border: none;
+            cursor: pointer;
             transition: opacity 0.2s;
+            white-space: nowrap;
         }
 
         .btn-link:hover {
             opacity: 0.9;
         }
 
-        /* 輔助標籤與 Tooltip 懸浮提示 */
+        .btn-link.sec {
+            background-color: var(--ty-secondary);
+        }
+
+        .btn-link.purple {
+            background-color: #6f42c1;
+        }
+
+        .btn-link.orange {
+            background-color: #fd7e14;
+        }
+
+        .btn-link.green {
+            background-color: #218838;
+        }
+
         .badge {
             background: #e1f5fe;
             color: #0288d1;
             padding: 2px 8px;
             border-radius: 12px;
             font-size: 0.8rem;
-            font-weight: normal;
         }
 
-        .phone-tooltip {
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
-            color: var(--ty-primary);
-            font-weight: bold;
-            margin-left: 4px;
-        }
-
-        .phone-tooltip .tooltip-text {
-            visibility: hidden;
-            width: 320px;
-            background-color: var(--ty-dark);
-            color: #fff;
-            text-align: left;
-            border-radius: 6px;
-            padding: 10px 12px;
-            position: absolute;
-            z-index: 10;
-            bottom: 125%;
-            left: 50%;
-            transform: translateX(-50%);
+        /* Pop-up 視窗 Modal 樣式 */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
             opacity: 0;
-            transition: opacity 0.2s;
-            font-size: 0.85rem;
-            font-weight: normal;
-            line-height: 1.5;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            visibility: hidden;
+            transition: all 0.25s ease;
+            padding: 1rem;
         }
 
-        .phone-tooltip .tooltip-text table {
-            width: 100%;
-            margin-top: 4px;
-            border-collapse: collapse;
-        }
-
-        .phone-tooltip .tooltip-text th, 
-        .phone-tooltip .tooltip-text td {
-            border: 1px solid #555;
-            padding: 4px 6px;
-            color: #fff;
-            font-size: 0.8rem;
-        }
-
-        .phone-tooltip .tooltip-text th {
-            background-color: #444;
-            color: #ffb74d;
-        }
-
-        .phone-tooltip:hover .tooltip-text {
-            visibility: visible;
+        .modal-overlay.active {
             opacity: 1;
+            visibility: visible;
         }
 
-        .highlight-text {
-            color: #d9534f;
-            font-weight: bold;
+        .modal-content {
+            background: white;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            padding: 1.5rem;
+            position: relative;
         }
 
-        .cut-box {
-            background: #fff3cd;
-            border-left: 3px solid #ffc107;
-            padding: 8px 12px;
-            margin-top: 6px;
-            border-radius: 4px;
-            font-style: normal;
-            font-size: 0.9rem;
-            line-height: 1.6;
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--ty-primary);
+            padding-bottom: 0.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-header h3 {
+            color: var(--ty-primary);
+            font-size: 1.2rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #888;
+            cursor: pointer;
+            padding: 0 4px;
+        }
+
+        .modal-close:hover {
+            color: var(--ty-primary);
+        }
+
+        /* 手機版響應式微調 */
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.1rem;
+            }
+            .step-card {
+                flex: 0 0 110px;
+            }
+            .content-panel {
+                padding: 1rem;
+            }
+            .panel-header h2 {
+                font-size: 1.2rem;
+            }
+            .panel-links-row {
+                justify-content: flex-start;
+            }
+            .btn-link {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>🏛️ 桃園協議價購案件辦理流程與通訊錄</h1>
+        <h1>🏛️ 徐瑛宜地政事務所—桃園協議價購案件辦理流程</h1>
         <span class="badge">小組內部共用</span>
     </header>
 
     <div class="container">
-        <!-- 8步驟橫條頁籤 -->
+        <!-- 8步驟橫條頁籤 (寬度與內容卡片完全對齊) -->
         <div class="step-navigation">
             <div class="step-card active" onclick="switchStep(1)">
                 <div class="step-number">Step 01</div>
@@ -420,7 +505,7 @@
             </div>
             <div class="step-card" onclick="switchStep(2)">
                 <div class="step-number">Step 02</div>
-                <div class="step-title">簽約</div>
+                <div class="step-title">簽約應備文件</div>
             </div>
             <div class="step-card" onclick="switchStep(3)">
                 <div class="step-number">Step 03</div>
@@ -452,142 +537,147 @@
         <!-- 步驟 1：簽約資料準備 -->
         <div id="step-1" class="content-panel active">
             <div class="panel-header">
-                <h2>步驟 1：簽約資料準備（代書應準備資料）</h2>
+                <h2>步驟 1：簽約資料準備</h2>
+                <div class="panel-links-row"></div>
             </div>
             
-            <h3 style="color: var(--ty-primary); margin-bottom: 1rem;">📁 代書應準備文件清單與填寫規範</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width: 25%;">文件名稱</th>
-                        <th style="width: 12%;">提供單位</th>
-                        <th style="width: 13%;">份數</th>
-                        <th style="width: 50%;">填寫注意事項與備註說明</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>1. 協議價購契約書 (私契)</strong></td>
-                        <td>市府</td>
-                        <td>一式 3 份</td>
-                        <td>
-                            <strong>※ 金額規定：</strong><br>
-                            • 瓶頸打通：公告現值 × 1.4 倍<br>
-                            • 市價：依估價師查估報告
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>2. 土地歸戶清冊</strong></td>
-                        <td>市府</td>
-                        <td>一式 3 份</td>
-                        <td>清冊下方備註欄<span class="highlight-text">要注意年度</span>。</td>
-                    </tr>
-                    <tr>
-                        <td><strong>3. 實價登錄委託書</strong></td>
-                        <td>地政</td>
-                        <td>1 份</td>
-                        <td>依規定完成相關基本資料填寫。</td>
-                    </tr>
-                    <tr>
-                        <td><strong>4. 土地登記申請書</strong></td>
-                        <td>地政</td>
-                        <td>1 份</td>
-                        <td>
-                            • <strong>登記原因：</strong>買賣<br>
-                            • <strong>申請人欄位：</strong><br>
-                            &nbsp;&nbsp;- 買受人：桃園市 0006800000<br>
-                            &nbsp;&nbsp;- 管理機關：桃園市政府工務局 代表人:汪在宙 26645701<br>
-                            • <strong>備註欄必填切結文字（※請分兩行填寫）：</strong>
-                            <div class="cut-box">
-                                1. 本案出賣土地確無出租，如有不實，出賣人願負法律責任。<br>
-                                2. 本案免繕發權利書狀。
-                            </div>
-                            <small style="color: #666; display: block; margin-top: 4px;">※ 公司戶及未成年子女有另外備註事項需注意！</small>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>5. 土地所有權買賣移轉契約書 (公契)</strong></td>
-                        <td>地政</td>
-                        <td>一式 2 份</td>
-                        <td>
-                            • <strong>登記以外的約定事項：</strong><br>
-                            <em style="background: #eef; padding: 2px 4px; display: inline-block; margin-top: 2px;">
-                                「本契約書由桃園市政府收執並持向地政機關辦理登記，得免貼印花。」
-                            </em>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>6. 土地增值稅申報書</strong></td>
-                        <td>地政</td>
-                        <td>1筆地號 1份</td>
-                        <td>
-                            • 協議價購案件都是<span class="highlight-text">按現值申報、契約依實價計算</span>。<br>
-                            • 如果前次移轉現值有多筆，改成在出賣人用「前次兩次以上輸入區」。<br>
-                            • <strong>登記原因：</strong>協議價購<br>
-                            • <strong>權利人部分合併為一欄：</strong>桃園市 管理機關:桃園市政府工務局 代表人:汪在宙 26645701
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>7. 土地複丈及標示變更登記申請書</strong></td>
-                        <td>地政</td>
-                        <td>1筆地號 1份</td>
-                        <td><span class="highlight-text">（有分割才需要辦理）</span></td>
-                    </tr>
-                </tbody>
-            </table>
+            <h3 style="color: var(--ty-primary); margin-bottom: 0.8rem;">📁 代書應準備文件清單與填寫規範</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">文件名稱</th>
+                            <th style="width: 12%;">提供單位</th>
+                            <th style="width: 13%;">份數</th>
+                            <th style="width: 50%;">填寫注意事項與備註說明</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1. 協議價購契約書 (私契)</strong></td>
+                            <td>市府</td>
+                            <td>一式 3 份</td>
+                            <td>
+                                <strong>※ 金額規定：</strong><br>
+                                • 瓶頸打通：公告現值 × 1.4 倍<br>
+                                • 市價：依估價師查估報告
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>2. 土地歸戶清冊</strong></td>
+                            <td>市府</td>
+                            <td>一式 3 份</td>
+                            <td>清冊下方備註欄<span class="highlight-text">要注意年度</span>。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3. 實價登錄委託書</strong></td>
+                            <td>地政</td>
+                            <td>1 份</td>
+                            <td>依規定完成相關基本資料填寫。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4. 土地登記申請書</strong></td>
+                            <td>地政</td>
+                            <td>1 份</td>
+                            <td>
+                                • <strong>登記原因：</strong>買賣<br>
+                                • <strong>申請人欄位：</strong><br>
+                                &nbsp;&nbsp;- 買受人：桃園市 0006800000<br>
+                                &nbsp;&nbsp;- 管理機關：桃園市政府工務局 代表人:汪在宙 26645701<br>
+                                • <strong>備註欄必填切結文字：</strong>
+                                <div class="cut-box">
+                                    1. 本案出賣土地確無出租，如有不實，出賣人願負法律責任。<br>
+                                    2. 本案免繕發權利書狀。
+                                </div>
+                                <small style="color: #666; display: block; margin-top: 4px;">※ 公司戶及未成年子女有另外備註事項需注意！</small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>5. 土地所有權買賣移轉契約書 (公契)</strong></td>
+                            <td>地政</td>
+                            <td>一式 2 份</td>
+                            <td>
+                                • <strong>登記以外的約定事項：</strong><br>
+                                <div class="cut-box">
+                                    「本契約書由桃園市政府收執並持向地政機關辦理登記，得免貼印花。」
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>6. 土地增值稅申報書</strong></td>
+                            <td>地政</td>
+                            <td>1筆地號 1份</td>
+                            <td>
+                                • 協議價購案件都是<span class="highlight-text">按現值申報、契約依實價計算</span>。<br>
+                                • 如果前次移轉現值有多筆，改成在出賣人用「前次兩次以上輸入區」。<br>
+                                • <strong>登記原因：</strong>協議價購<br>
+                                • <strong>權利人部分合併為一欄：</strong>桃園市 管理機關:桃園市政府工務局 代表人:汪在宙 26645701
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>7. 土地複丈及標示變更登記申請書</strong></td>
+                            <td>地政</td>
+                            <td>1筆地號 1份</td>
+                            <td><span class="highlight-text">（有分割才需要辦理）</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
-        <!-- 步驟 2：簽約 -->
+        <!-- 步驟 2：協議價購簽約應備文件 -->
         <div id="step-2" class="content-panel">
             <div class="panel-header">
-                <h2>步驟 2：協議價購簽約應備文件 (所有權人端)</h2>
-                <div>
-                    <a href="https://land.hsinchu.gov.tw/content/?parent_id=10311&type_id=10311" target="_blank" class="btn-link" style="background-color: var(--ty-secondary);">📜 權狀舊年份對照表</a>
+                <h2>步驟 2：協議價購簽約應備文件</h2>
+                <div class="panel-links-row">
+                    <a href="https://land.hsinchu.gov.tw/content/?parent_id=10311&type_id=10311" target="_blank" rel="noopener noreferrer" class="btn-link sec">📜 權狀舊年份對照表</a>
                 </div>
             </div>
 
             <h3 style="color: var(--ty-primary); margin-bottom: 0.8rem;">📋 簽約文件快速檢核表</h3>
-            <table class="check-table">
-                <tbody>
-                    <tr>
-                        <td class="label-cell" rowspan="2">應收文件</td>
-                        <td><strong>權狀</strong></td>
-                        <td><strong>身分證影本 3 份</strong></td>
-                        <td><strong>存摺影本 1 份</strong></td>
-                        <td><strong>印鑑證明 2 份</strong></td>
-                        <td style="text-align: left; background-color: #fffde7;" rowspan="2">
-                            <strong style="color: #d9534f;">※ 備註：</strong><br>
-                            <span class="highlight-text">※ 文件都不要壓日期！！！</span><br>
-                            <span class="highlight-text">※ 注意是否要騎縫 ⬇</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td class="label-cell" rowspan="2">用印文件</td>
-                        <td><strong>私契 5 份</strong></td>
-                        <td><strong>歸戶清冊 3 份</strong></td>
-                        <td><strong>實登委託書 1 份</strong></td>
-                        <td><strong>登記申請書 1 份</strong></td>
-                        <td><strong>公契 2 份</strong></td>
-                        <td><strong>土增申報書</strong></td>
-                        <td><strong>分割申請書</strong></td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="check-table">
+                    <tbody>
+                        <tr>
+                            <td class="label-cell" rowspan="2">應收文件</td>
+                            <td><strong>權狀</strong></td>
+                            <td><strong>身分證影本 3 份</strong></td>
+                            <td><strong>存摺影本 1 份</strong></td>
+                            <td><strong>印鑑證明 2 份</strong></td>
+                            <td style="text-align: left; background-color: #fffde7;" rowspan="2">
+                                <strong style="color: #d9534f;">※ 備註：</strong><br>
+                                <span class="highlight-text">※ 文件都不要壓日期！！！</span><br>
+                                <span class="highlight-text">※ 注意是否要騎縫 ⬇</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="label-cell" rowspan="2">用印文件</td>
+                            <td><strong>私契 5 份</strong></td>
+                            <td><strong>歸戶清冊 3 份</strong></td>
+                            <td><strong>實登委託書 1 份</strong></td>
+                            <td><strong>登記申請書 1 份</strong></td>
+                            <td><strong>公契 2 份</strong></td>
+                            <td><strong>土增申報書</strong></td>
+                            <td><strong>分割申請書</strong></td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <div class="info-grid">
                 <div class="info-card">
@@ -665,7 +755,10 @@
 
         <!-- 步驟 3：用印 -->
         <div id="step-3" class="content-panel">
-            <div class="panel-header"><h2>步驟 3：用印作業規範</h2></div>
+            <div class="panel-header">
+                <h2>步驟 3：用印作業規範</h2>
+                <div class="panel-links-row"></div>
+            </div>
             <div class="info-grid">
                 <div class="info-card">
                     <h3>📑 1. 分批做用印清冊</h3>
@@ -686,44 +779,62 @@
                 </div>
                 <div class="info-card" style="border-left-color: #d9534f; background-color: #fdf2f2;">
                     <h3 style="color: #d9534f;">⏰ 3. 成果檢送時程管制</h3>
-                    <p style="font-size: 1.05rem;">用印完成返回後，請預先推算並於 <strong style="color: #d9534f; font-size: 1.2rem;">50 個日曆天內</strong> 檢送成果！</p>
+                    <p style="font-size: 0.95rem;">用印完成返回後，請預先推算並於 <strong style="color: #d9534f; font-size: 1.1rem;">50 個日曆天內</strong> 檢送成果！</p>
                 </div>
             </div>
         </div>
 
-        <!-- 步驟 4：變更編定 + 分割 -->
+        <!-- 步驟 4：變更編定 + 分割 (側邊改為桃紅色邊條) -->
         <div id="step-4" class="content-panel">
             <div class="panel-header">
                 <h2>步驟 4：變更編定與分割作業流程</h2>
-                <span class="optional-tag" style="font-size: 0.9rem; padding: 4px 8px;">（視案件需求辦理）</span>
+                <div class="panel-links-row">
+                    <span class="optional-tag" style="font-size: 0.85rem; padding: 4px 8px;">（視案件需求辦理）</span>
+                </div>
             </div>
-            <div style="max-width: 800px; margin: 0 auto;">
-                <div class="flow-step-box">
+
+            <div class="flow-vertical-container">
+                <div class="flow-v-step">
                     <h3>1. 送農審表至農業局</h3>
-                    <p>將農審表送交農業局審查，核准後送地政局。</p>
-                    <p style="margin-top: 6px;"><strong style="color: var(--ty-primary);">📎 應附文件：</strong>雙方用印之私契 ＋ 身分證影本</p>
+                    <p style="font-size: 0.92rem;">將農審表送交農業局審查，核准後送地政局。</p>
+                    <div class="cut-box" style="margin-top: 8px;">
+                        <strong>📎 應附文件：</strong>雙方用印之私契 ＋ 身分證影本
+                    </div>
                 </div>
-                <div class="flow-arrow">⬇️</div>
-                <div class="flow-step-box">
+
+                <div class="flow-v-arrow">⬇️</div>
+
+                <div class="flow-v-step">
                     <h3>2. 地政局核准變更編定</h3>
-                    <p>地政局審查核准後，將收到核准函（正式公文）。</p>
+                    <p style="font-size: 0.92rem;">地政局審查核准後，將收到核准函（正式公文）。</p>
                 </div>
-                <div class="flow-arrow">⬇️</div>
-                <div class="flow-step-box">
+
+                <div class="flow-v-arrow">⬇️</div>
+
+                <div class="flow-v-step">
                     <h3>3. 送分割案件至土地管轄地政事務所</h3>
-                    <p>辦理土地分割複丈作業。</p>
-                    <p style="margin-top: 6px;"><strong style="color: var(--ty-primary);">📎 應附文件：</strong>核准函之公文影本</p>
+                    <p style="font-size: 0.92rem;">辦理土地分割複丈作業。</p>
+                    <div class="cut-box" style="margin-top: 8px;">
+                        <strong>📎 應附文件：</strong>核准函之公文影本
+                    </div>
                 </div>
-                <div class="flow-arrow">⬇️</div>
-                <div class="flow-step-box" style="border-left: 4px solid var(--ty-secondary); background: #f0f7f7;">
-                    <h3 style="color: var(--ty-secondary);">4. 地政事務所辦理分割程序</h3>
-                    <p><strong>標準作業程序：</strong></p>
-                    <div style="background: white; padding: 8px 12px; border-radius: 4px; margin: 8px 0; border: 1px dashed var(--ty-secondary);">收件 ➔ 測量 ➔ 登記 ➔ 變更編定登記 ➔ 結案</div>
-                    <p style="margin-top: 10px;"><strong style="color: #d9534f;">⚠️ 務必再次確認以下重點：</strong></p>
-                    <ul style="margin-top: 4px; padding-left: 1.2rem;">
-                        <li>土地分區是否已正確變成<span class="highlight-text">交通用地</span>。</li>
-                        <li>確認<span class="highlight-text">沒有原地主造成的註記</span>（例如：農舍套繪等）。</li>
-                    </ul>
+
+                <div class="flow-v-arrow">⬇️</div>
+
+                <!-- 修正：側邊邊條改為桃紅色 (var(--ty-primary)) -->
+                <div class="flow-v-step" style="border-left-color: var(--ty-primary);">
+                    <h3>4. 地政事務所辦理分割程序</h3>
+                    <p style="font-size: 0.92rem;"><strong>標準作業程序：</strong></p>
+                    <div class="yellow-highlight" style="display: block; margin: 6px 0; text-align: center;">
+                        收件 ➔ 測量 ➔ 登記 ➔ 變更編定登記 ➔ 結案
+                    </div>
+                    <div class="cut-box">
+                        <strong style="color: #d9534f;">⚠️ 務必再次確認以下重點：</strong>
+                        <ul style="padding-left: 1.2rem; margin-top: 4px;">
+                            <li>土地分區是否已正確變成<strong>交通用地</strong>。</li>
+                            <li>確認<strong>沒有原地主造成的註記</strong>（例如：農舍套繪等）。</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -732,9 +843,9 @@
         <div id="step-5" class="content-panel">
             <div class="panel-header">
                 <h2>步驟 5：報稅作業重點</h2>
-                <div style="display: flex; gap: 10px;">
-                    <a href="https://net.tax.nat.gov.tw/PLRX/Lrx200d01/index.html" target="_blank" class="btn-link" style="background-color: var(--ty-secondary);">🌐 地方稅網路申報入口網</a>
-                    <a href="https://tytax.tycg.gov.tw/cp.aspx?n=4755" target="_blank" class="btn-link">🔗 桃園地方稅務局官網</a>
+                <div class="panel-links-row">
+                    <a href="https://net.tax.nat.gov.tw/PLRX/Lrx200d01/index.html" target="_blank" rel="noopener noreferrer" class="btn-link sec">🌐 地方稅網路申報入口網</a>
+                    <a href="https://tytax.tycg.gov.tw/cp.aspx?n=4755" target="_blank" rel="noopener noreferrer" class="btn-link">🔗 桃園地方稅務局官網</a>
                 </div>
             </div>
 
@@ -761,12 +872,14 @@
                     <h3>✍️ 3. 填寫案件編號與日期</h3>
                     <ul>
                         <li><strong>需蓋發生日/報稅日及填寫土增稅案件編號之文件：</strong><br>土增申報書、土地登記申請書、公契、實登委託書、私契。</li>
-                        <li><strong>身分證切結文字：</strong><br><em style="background: #fff3cd; padding: 2px 4px; display: inline-block; margin-top: 2px;">「本影本與正本相符，如有不實願負法律責任。」</em></li>
+                        <li><strong>身分證切結文字：</strong>
+                            <div class="cut-box">「本影本與正本相符，如有不實願負法律責任。」</div>
+                        </li>
                     </ul>
                 </div>
                 <div class="info-card">
                     <h3>📎 4. 上傳完稅附件</h3>
-                    <p><strong>掃描順序（請嚴格遵守）：</strong></p>
+                    <p style="font-size:0.92rem;"><strong>掃描順序（請嚴格遵守）：</strong></p>
                     <ol>
                         <li>土增申報書</li>
                         <li>公契</li>
@@ -775,7 +888,7 @@
                         <li>派工公文</li>
                         <li>使用分區證明（<span class="highlight-text">都市計畫內土地才有</span>）</li>
                     </ol>
-                    <p style="margin-top: 8px;"><strong>系統上傳：</strong>憑證登錄稅務局網站 ➔ 不動產移轉申報 ➔ 申報與查詢 ➔ 選桃園市查詢 ➔ 進入案件點選「<span class="highlight-text">完稅附件上傳</span>」（選不分檔一次上傳）。</p>
+                    <p style="margin-top: 8px; font-size: 0.92rem;"><strong>系統上傳：</strong>憑證登錄稅務局網站 ➔ 不動產移轉申報 ➔ 申報與查詢 ➔ 選桃園市查詢 ➔ 進入案件點選「<span class="highlight-text">完稅附件上傳</span>」（選不分檔一次上傳）。</p>
                 </div>
                 <div class="info-card">
                     <h3>📌 5. 稅單下來後釘法</h3>
@@ -787,129 +900,63 @@
                 </div>
             </div>
 
-            <h3 style="color: var(--ty-primary); margin-bottom: 1rem;">🏢 桃園市地方稅務局總局與各分局轄區及聯絡資訊</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width: 20%;">服務單位</th>
-                        <th style="width: 30%;">房屋/土地所在地 (轄區)</th>
-                        <th style="width: 50%;">地址與電話 / 承辦人分機對照</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>桃園稅務總局</strong></td>
-                        <td><span class="highlight-text">桃園區、龜山區、八德區</span></td>
-                        <td>
-                            (03) 332-6181
-                            <span class="phone-tooltip">ℹ️ 承辦分機表
-                                <div class="tooltip-text">
-                                    <strong>📞 桃園稅務總局 承辦分機</strong>
-                                    <table>
-                                        <tr><th>承辦人員</th><th>分機</th></tr>
-                                        <tr><td>朱百琪</td><td>#2753</td></tr>
-                                        <tr><td>沈宛臻</td><td>#2753</td></tr>
-                                        <tr><td>楊念蓁</td><td>#2754</td></tr>
-                                        <tr><td>黃郁涵</td><td>#2755</td></tr>
-                                        <tr><td>王品雅</td><td>#2756</td></tr>
-                                        <tr><td>何韶婷</td><td>#2757</td></tr>
-                                        <tr><td>葉貞江</td><td>#2762</td></tr>
-                                        <tr><td>林佩青</td><td>#2763</td></tr>
-                                        <tr><td>賴霈裕</td><td>#2764</td></tr>
-                                        <tr><td>藍秀慈</td><td>#2764</td></tr>
-                                        <tr><td>詹文嘉</td><td>#2767</td></tr>
-                                    </table>
-                                </div>
-                            </span><br>
-                            <small>桃園區成功路二段179號</small>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>中壢稅務局</strong></td>
-                        <td><span class="highlight-text">中壢區、平鎮區、觀音區</span></td>
-                        <td>
-                            (03) 451-5111
-                            <span class="phone-tooltip">ℹ️ 承辦分機表
-                                <div class="tooltip-text">
-                                    <strong>📞 中壢稅務局 承辦分機</strong>
-                                    <table>
-                                        <tr><th>承辦人員</th><th>分機</th><th>備註提醒</th></tr>
-                                        <tr><td>李千有</td><td>#205</td><td></td></tr>
-                                        <tr><td>吳亞芸</td><td>#205</td><td></td></tr>
-                                        <tr><td>潘姿妏</td><td>#207</td><td><span style="color:#ffb74d;">記得要一直催稅單</span></td></tr>
-                                        <tr><td>林承志</td><td>#208</td><td></td></tr>
-                                        <tr><td>黃思涵</td><td>#208</td><td></td></tr>
-                                        <tr><td>楊立嶕</td><td>#209</td><td></td></tr>
-                                        <tr><td>李崔琳</td><td>#211</td><td></td></tr>
-                                        <tr><td>葉庭豪</td><td>#215</td><td><span style="color:#ffb74d;">申請稅單動作很慢</span></td></tr>
-                                        <tr><td>黃興龍</td><td>#215</td><td></td></tr>
-                                        <tr><td>陳彥甯</td><td>#216</td><td></td></tr>
-                                        <tr><td>李云</td><td>#217</td><td></td></tr>
-                                        <tr><td>江美瑤</td><td>--</td><td><span style="color:#81c784;">稅單核發很快</span></td></tr>
-                                    </table>
-                                </div>
-                            </span><br>
-                            <small>中壢區溪洲街296號3樓</small>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>大溪稅務局</strong></td>
-                        <td><span class="highlight-text">大溪區、龍潭區、復興區</span></td>
-                        <td>
-                            (03) 380-0072<br>
-                            <small>桃園市大溪區員林路一段16號</small>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>楊梅稅務局</strong></td>
-                        <td><span class="highlight-text">楊梅區、新屋區</span></td>
-                        <td>
-                            (03) 478-1974
-                            <span class="phone-tooltip">ℹ️ 承辦分機表
-                                <div class="tooltip-text">
-                                    <strong>📞 楊梅稅務局 承辦分機</strong>
-                                    <table>
-                                        <tr><th>承辦人員</th><th>分機</th></tr>
-                                        <tr><td>陳映竹</td><td>#106</td></tr>
-                                    </table>
-                                </div>
-                            </span><br>
-                            <small>楊梅區中山路212號</small>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>蘆竹稅務局</strong></td>
-                        <td><span class="highlight-text">蘆竹區、大園區</span></td>
-                        <td>
-                            (03) 352-8671
-                            <span class="phone-tooltip">ℹ️ 承辦分機表
-                                <div class="tooltip-text">
-                                    <strong>📞 蘆竹稅務局 承辦分機</strong>
-                                    <table>
-                                        <tr><th>承辦人員</th><th>分機</th></tr>
-                                        <tr><td>許麗娟</td><td>#125</td></tr>
-                                        <tr><td>鍾孟蓉</td><td>--</td></tr>
-                                        <tr><td>范雅婷</td><td>#126</td></tr>
-                                    </table>
-                                </div>
-                            </span><br>
-                            <small>蘆竹區南崁路150號2樓</small>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <h3 style="color: var(--ty-primary); margin-bottom: 0.8rem;">🏢 桃園市地方稅務局總局與各分局聯絡與審查分機</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 20%;">服務單位</th>
+                            <th style="width: 30%;">房屋/土地所在地 (轄區)</th>
+                            <th style="width: 30%;">地址與電話</th>
+                            <th style="width: 20%;">承辦分機清單</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>桃園稅務總局</strong></td>
+                            <td><span class="highlight-text">桃園區、龜山區、八德區</span></td>
+                            <td>(03) 332-6181<br><small>桃園區成功路二段179號</small></td>
+                            <td><button class="btn-link sec" onclick="openModal('modal-tax-ty')">📞 查看分機</button></td>
+                        </tr>
+                        <tr>
+                            <td><strong>中壢稅務局</strong></td>
+                            <td><span class="highlight-text">中壢區、平鎮區、觀音區</span></td>
+                            <td>(03) 451-5111<br><small>中壢區溪洲街296號3樓</small></td>
+                            <td><button class="btn-link sec" onclick="openModal('modal-tax-zl')">📞 查看分機</button></td>
+                        </tr>
+                        <tr>
+                            <td><strong>大溪稅務局</strong></td>
+                            <td><span class="highlight-text">大溪區、龍潭區、復興區</span></td>
+                            <td>(03) 380-0072<br><small>桃園市大溪區員林路一段16號</small></td>
+                            <td>--</td>
+                        </tr>
+                        <tr>
+                            <td><strong>楊梅稅務局</strong></td>
+                            <td><span class="highlight-text">楊梅區、新屋區</span></td>
+                            <td>(03) 478-1974<br><small>楊梅區中山路212號</small></td>
+                            <td><button class="btn-link sec" onclick="openModal('modal-tax-ym')">📞 查看分機</button></td>
+                        </tr>
+                        <tr>
+                            <td><strong>蘆竹稅務局</strong></td>
+                            <td><span class="highlight-text">蘆竹區、大園區</span></td>
+                            <td>(03) 352-8671<br><small>蘆竹區南崁路150號2樓</small></td>
+                            <td><button class="btn-link sec" onclick="openModal('modal-tax-lz')">📞 查看分機</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
-        <!-- 步驟 6：送件專區 (已更新工具相對路徑) -->
+        <!-- 步驟 6：送件專區 (已調整欄寬、修正錯字與補充大溪轄區，筆電不換行) -->
         <div id="step-6" class="content-panel">
             <div class="panel-header">
                 <h2>步驟 6：送件作業重點</h2>
-                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <a href="./tool2/index.html" class="btn-link" style="background-color: #6f42c1;">🧮 連前持分計算</a>
-                    <a href="./tool1/index.html" class="btn-link" style="background-color: #fd7e14;">💰 土地登記規費試算</a>
-                    <a href="https://vlir.land.moi.gov.tw/#" target="_blank" class="btn-link" style="background-color: #218838;">🏠 內政部實價登錄網站</a>
-                    <a href="https://www.ris.gov.tw/app/portal/3014" target="_blank" class="btn-link" style="background-color: var(--ty-secondary);">🆔 身分證核對工具</a>
-                    <a href="https://land.tycg.gov.tw/News_Link.aspx?n=4142&sms=10098" target="_blank" class="btn-link">🔗 桃園地政局轄區地所連結</a>
+                <div class="panel-links-row">
+                    <a href="./tool2/index.html" target="_blank" rel="noopener noreferrer" class="btn-link purple">🧮 連前持分計算</a>
+                    <a href="./tool1/index.html" target="_blank" rel="noopener noreferrer" class="btn-link orange">💰 土地登記規費試算</a>
+                    <a href="https://vlir.land.moi.gov.tw/#" target="_blank" rel="noopener noreferrer" class="btn-link green">🏠 內政部實價登錄網站</a>
+                    <a href="https://www.ris.gov.tw/app/portal/3014" target="_blank" rel="noopener noreferrer" class="btn-link sec">🆔 身分證核對工具</a>
+                    <a href="https://land.tycg.gov.tw/News_Link.aspx?n=4142&sms=10098" target="_blank" rel="noopener noreferrer" class="btn-link">🔗 桃園地政局轄區地所連結</a>
                 </div>
             </div>
 
@@ -924,158 +971,106 @@
                 <div class="info-card">
                     <h3>🔍 2. 送件前檢查</h3>
                     <ul>
-                        <li><strong>身分證核對：</strong>務必再次確認身分證是否為最新資料（可點選上方「身分證核對工具」按鈕）。</li>
+                        <li><strong>身分證核對：</strong>務必再次確認身分證是否為最新資料。</li>
                         <li><strong>地址不符處理：</strong>地址跟身分證不一樣時，在<span class="highlight-text">原地址下方寫新址</span>（原本地址不用槓掉）。</li>
                     </ul>
                 </div>
             </div>
 
-            <h3 style="color: var(--ty-primary); margin-bottom: 1rem;">🏢 桃園市各地政事務所轄區與送件注意事項</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width: 18%;">地政事務所</th>
-                        <th style="width: 15%;">轄區</th>
-                        <th style="width: 25%;">地址與電話</th>
-                        <th style="width: 42%;">送件注意事項</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>桃園地政事務所</strong></td>
-                        <td>桃園區</td>
-                        <td>
-                            (03) 369-5588
-                            <span class="phone-tooltip">ℹ️ 分機
-                                <span class="tooltip-text">登記科審查課：<br>分機 #102 ~ #115</span>
-                            </span><br>
-                            <small>桃園區國豐三街123號</small>
-                        </td>
-                        <td>實價登錄申報書及委託書釘<span class="highlight-text">公契第二聯背面上方</span>。</td>
-                    </tr>
-                    <tr>
-                        <td><strong>中壢地政事務所</strong></td>
-                        <td>中壢區、觀音區</td>
-                        <td>
-                            (03) 452-9210
-                            <span class="phone-tooltip">ℹ️ 分機
-                                <span class="tooltip-text">登記科審查課：<br>分機 #105 ~ #118</span>
-                            </span><br>
-                            <small>中壢區溪洲街296號</small>
-                        </td>
-                        <td>實價登錄申報書及委託書釘<span class="highlight-text">公契第二聯背面下方</span>。</td>
-                    </tr>
-                    <tr>
-                        <td><strong>平鎮地政事務所</strong></td>
-                        <td>平鎮區</td>
-                        <td>
-                            (03) 459-2210
-                            <span class="phone-tooltip">ℹ️ 審查分機
-                                <div class="tooltip-text">
-                                    <strong>📞 平鎮地所 審查分機表</strong>
-                                    <table>
-                                        <tr><th>類別</th><th>人員</th><th>分機</th></tr>
-                                        <tr><td rowspan="2">複審</td><td>朱佩琪</td><td>103</td></tr>
-                                        <tr><td>鄒貴嬌</td><td>105</td></tr>
-                                        <tr><td rowspan="9">初審</td><td>吳貴博</td><td>116</td></tr>
-                                        <tr><td>柯雅美</td><td>114</td></tr>
-                                        <tr><td>呂季燕</td><td>104</td></tr>
-                                        <tr><td>吳佩儒</td><td>106</td></tr>
-                                        <tr><td>（初審）</td><td>107</td></tr>
-                                        <tr><td>陳建達</td><td>112</td></tr>
-                                        <tr><td>範志中</td><td>111</td></tr>
-                                        <tr><td>劉麗卿</td><td>128</td></tr>
-                                        <tr><td>林君諺</td><td>127</td></tr>
-                                        <tr><td>單一</td><td>葉婉琳</td><td>102</td></tr>
-                                        <tr><td rowspan="2">校對</td><td>黃政榮</td><td>115</td></tr>
-                                        <tr><td>白薏萱</td><td>117</td></tr>
-                                        <tr><td>未辦繼承</td><td>方准親</td><td>123</td></tr>
-                                    </table>
+            <h3 style="color: var(--ty-primary); margin-bottom: 0.8rem;">🏢 桃園市各地政事務所轄區與送件注意事項</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 15%;">地政事務所</th>
+                            <!-- 轄區加寬並加強強制不換行 (white-space: nowrap) -->
+                            <th style="width: 22%; white-space: nowrap;">轄區</th>
+                            <!-- 地址電話適度縮窄 -->
+                            <th style="width: 20%;">地址與電話</th>
+                            <th style="width: 13%;">審查分機</th>
+                            <!-- 送件注意事項加寬 -->
+                            <th style="width: 30%;">送件注意事項</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>桃園地政事務所</strong></td>
+                            <td style="white-space: nowrap;">桃園區</td>
+                            <td>(03) 369-5588<br><small>桃園區國豐三街123號</small></td>
+                            <td><button class="btn-link sec" onclick="openModal('modal-land-ty')">📞 #102~115</button></td>
+                            <td>實價登錄申報書及委託書釘<span class="highlight-text">公契第二聯背面上方</span>。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>中壢地政事務所</strong></td>
+                            <td style="white-space: nowrap;">中壢區、觀音區</td>
+                            <td>(03) 452-9210<br><small>中壢區溪洲街296號</small></td>
+                            <td><button class="btn-link sec" onclick="openModal('modal-land-zl')">📞 #105~118</button></td>
+                            <td>實價登錄申報書及委託書釘<span class="highlight-text">公契第二聯背面下方</span>。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>平鎮地政事務所</strong></td>
+                            <td style="white-space: nowrap;">平鎮區</td>
+                            <td>(03) 459-2210<br><small>平鎮區振興路5號</small></td>
+                            <td><button class="btn-link sec" onclick="openModal('modal-land-pz')">📞 查看詳細</button></td>
+                            <td>
+                                1. 實價登錄申報書及委託書釘<span class="highlight-text">土地登記申請書正面上方</span>。<br>
+                                2. 需在登記申請書備註欄切結：
+                                <div class="cut-box">
+                                    「本案確為土地徵收條例第11條第一項所規定之協議價購，依同條第三項之規定，確無優先購買權之適用。」
                                 </div>
-                            </span><br>
-                            <small>平鎮區振興路5號</small>
-                        </td>
-                        <td>
-                            1. 實價登錄申報書及委託書釘<span class="highlight-text">土地登記申請書正面上方</span>。<br>
-                            2. 需在登記申請書備註欄切結：<br>
-                            <em style="background: #fff3cd; padding: 2px 4px; display: inline-block; margin-top: 4px;">
-                                「本案確為土地徵收條例第11條第一項所規定之協議價購，依同條第三項之規定，確無優先購買權之適用。」
-                            </em>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>楊梅地政事務所</strong></td>
-                        <td>楊梅區、新屋區</td>
-                        <td>
-                            (03) 478-2121
-                            <span class="phone-tooltip">ℹ️ 分機
-                                <span class="tooltip-text">登記科審查課：<br>分機 #101 ~ #106</span>
-                            </span><br>
-                            <small>楊梅區校前路408號</small>
-                        </td>
-                        <td>實價登錄申報書及委託書<span class="highlight-text">對折釘在登記原因下方</span>。</td>
-                    </tr>
-                    <tr>
-                        <td><strong>蘆竹地政事務所</strong></td>
-                        <td>蘆竹區、大園區</td>
-                        <td>
-                            (03) 322-5201
-                            <span class="phone-tooltip">ℹ️ 分機
-                                <span class="tooltip-text">登記科審查課：<br>分機 #111 ~ #116</span>
-                            </span><br>
-                            <small>蘆竹區長興路一段108號</small>
-                        </td>
-                        <td>送件前通知領狀欄位可以直接先<span class="highlight-text">蓋好代書章</span>。</td>
-                    </tr>
-                    <tr>
-                        <td><strong>大溪地政事務所</strong></td>
-                        <td>大溪區、復興區、龍潭區</td>
-                        <td>
-                            (03) 388-3161
-                            <span class="phone-tooltip">ℹ️ 分機
-                                <span class="tooltip-text">登記科審查課：<br>分機 #102 ~ #108</span>
-                            </span><br>
-                            <small>大溪區員林路一段189號</small>
-                        </td>
-                        <td>--</td>
-                    </tr>
-                    <tr>
-                        <td><strong>八德地政事務所</strong></td>
-                        <td>八德區</td>
-                        <td>
-                            (03) 368-2015
-                            <span class="phone-tooltip">ℹ️ 分機
-                                <span class="tooltip-text">登記科審查課：<br>分機 #101 ~ #105</span>
-                            </span><br>
-                            <small>八德區興豐路268號</small>
-                        </td>
-                        <td>--</td>
-                    </tr>
-                    <tr>
-                        <td><strong>龜山地政事務所</strong></td>
-                        <td>龜山區</td>
-                        <td>
-                            (03) 350-2020
-                            <span class="phone-tooltip">ℹ️ 分機
-                                <span class="tooltip-text">登記科審查課：<br>分機 #101 ~ #105</span>
-                            </span><br>
-                            <small>龜山區自強南路105號</small>
-                        </td>
-                        <td>--</td>
-                    </tr>
-                </tbody>
-            </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>楊梅地政事務所</strong></td>
+                            <td style="white-space: nowrap;">楊梅區、新屋區</td>
+                            <td>(03) 478-2121<br><small>楊梅區校前路408號</small></td>
+                            <td><button class="btn-link sec" onclick="openModal('modal-land-ym')">📞 #101~106</button></td>
+                            <td>實價登錄申報書及委託書<span class="highlight-text">對折釘在登記原因下方</span>。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>蘆竹地政事務所</strong></td>
+                            <td style="white-space: nowrap;">蘆竹區、大園區</td>
+                            <td>(03) 322-5201<br><small>蘆竹區長興路一段108號</small></td>
+                            <td><button class="btn-link sec" onclick="openModal('modal-land-lz')">📞 #111~116</button></td>
+                            <td>送件前通知領狀欄位可以直接先<span class="highlight-text">蓋好代書章</span>。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>大溪地政事務所</strong></td>
+                            <!-- 修正錯字「復興」與補齊完整轄區名稱，設定 white-space: nowrap 筆電不上鎖折行 -->
+                            <td style="white-space: nowrap;">大溪區、復興區、龍潭區</td>
+                            <td>(03) 388-3161<br><small>大溪區員林路一段189號</small></td>
+                            <td><button class="btn-link sec" onclick="openModal('modal-land-dx')">📞 #102~108</button></td>
+                            <td>--</td>
+                        </tr>
+                        <tr>
+                            <td><strong>八德地政事務所</strong></td>
+                            <td style="white-space: nowrap;">八德區</td>
+                            <td>(03) 368-2015<br><small>八德區興豐路268號</small></td>
+                            <td><button class="btn-link sec" onclick="openModal('modal-land-bd')">📞 #101~105</button></td>
+                            <td>--</td>
+                        </tr>
+                        <tr>
+                            <td><strong>龜山地政事務所</strong></td>
+                            <td style="white-space: nowrap;">龜山區</td>
+                            <td>(03) 350-2020<br><small>龜山區自強南路105號</small></td>
+                            <td><button class="btn-link sec" onclick="openModal('modal-land-ks')">📞 #101~105</button></td>
+                            <td>--</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
-        <!-- 步驟 7：領件 -->
+        <!-- 步驟 7：領件 (側邊改為桃紅色邊條) -->
         <div id="step-7" class="content-panel">
             <div class="panel-header">
                 <h2>步驟 7：領件與進度查詢</h2>
-                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <a href="https://www.land.tycg.gov.tw/chaspx/SQry3.aspx/22" target="_blank" class="btn-link">🔎 桃園地政案件辦理查詢</a>
-                    <a href="https://dcland.moi.gov.tw/CaseStatus/AGTQuery" target="_blank" class="btn-link" style="background-color: var(--ty-secondary);">🌐 跨域代收案件查詢</a>
+                <div class="panel-links-row">
+                    <a href="https://www.land.tycg.gov.tw/chaspx/SQry3.aspx/22" target="_blank" rel="noopener noreferrer" class="btn-link">🔎 桃園地政案件辦理查詢</a>
+                    <a href="https://dcland.moi.gov.tw/CaseStatus/AGTQuery" target="_blank" rel="noopener noreferrer" class="btn-link sec">🌐 跨域代收案件查詢</a>
                 </div>
             </div>
+
             <div class="info-grid">
                 <div class="info-card">
                     <h3>🔍 線上案件查詢</h3>
@@ -1084,12 +1079,16 @@
                         <li><strong>跨縣市代收案件：</strong>可使用「跨域代收案件查詢」系統即時掌握跨區案件辦理狀態。</li>
                     </ul>
                 </div>
-                <div class="info-card">
-                    <h3>📦 領件作業注意事項</h3>
-                    <ul>
-                        <li>確認登記完成後，攜帶<strong>領件收據</strong>及<strong>代書印章</strong>至地政事務所領取新發權利書狀或登記謄本。</li>
+
+                <!-- 修正：邊條改為桃紅色 (var(--ty-primary)) -->
+                <div class="info-card" style="border-left-color: var(--ty-primary);">
+                    <h3>📦 領件注意事項</h3>
+                    <ol>
+                        <li>確認登記完成後，攜帶<strong>領件收據</strong>及<strong>代書印章</strong>至地政事務所領取新發權利書狀及公契。</li>
+                        <li>核對公契收件編號與所有權人資訊。</li>
                         <li>核對權利書狀內容（地號、面積、所有權人姓名、身分證字號等）是否完全無誤。</li>
-                    </ul>
+                        <li><span class="highlight-text">大溪地政會主動換狀</span>，其他地所若有逕割的，通常只有母地號會幫忙換狀。</li>
+                    </ol>
                 </div>
             </div>
         </div>
@@ -1098,82 +1097,233 @@
         <div id="step-8" class="content-panel">
             <div class="panel-header">
                 <h2>步驟 8：送結案作業規範</h2>
+                <div class="panel-links-row"></div>
             </div>
-            <p style="margin-bottom: 1rem;">彙整所有協議價購文件、撥款憑證與領件資料，並依規定備妥以下結案清冊與檔案送相關單位辦理歸檔結案：</p>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width: 35%;">結案文件項目</th>
-                        <th style="width: 15%;">份數</th>
-                        <th style="width: 50%;">備註與製作規範</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <strong>1. 地價補償清冊</strong><br>
-                            <small style="color: #666; display: block; margin-top: 4px;">
-                                ※ 補償清冊 = 封面 ＋ 索引表 ＋ 土地歸戶清冊<br>
-                                ※ 所有權人為公共有時，需附上協議價購金分配書
-                            </small>
-                        </td>
-                        <td>
-                            3 份<br>
-                            <small style="color: #666;">（一批做成一式 3 份）</small>
-                        </td>
-                        <td>
-                            • 有蓋章格：<strong>1 份</strong>（補償清冊封面：1 份陳核歸檔、1 份發價、1 份留存）<br>
-                            • 無蓋章格：<strong>2 份</strong><br>
-                            • 協價分配書兩頁印同一張正反面
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>2. 協議價購契約書</strong> (一式 3 份)</td>
-                        <td>3 份</td>
-                        <td>--</td>
-                    </tr>
-                    <tr>
-                        <td><strong>3. 印鑑證明</strong></td>
-                        <td>1 份 (或 2 份)</td>
-                        <td>--</td>
-                    </tr>
-                    <tr>
-                        <td><strong>4. 所有權人身分證影本</strong></td>
-                        <td>1 份</td>
-                        <td>--</td>
-                    </tr>
-                    <tr>
-                        <td><strong>5. 存摺影本</strong></td>
-                        <td>1 份</td>
-                        <td>--</td>
-                    </tr>
-                    <tr>
-                        <td><strong>6. 土地所有權買賣移轉契約書</strong></td>
-                        <td>1 份</td>
-                        <td>--</td>
-                    </tr>
-                    <tr>
-                        <td><strong>7. 土地增值稅免稅證明書</strong></td>
-                        <td>依稅單筆數</td>
-                        <td>--</td>
-                    </tr>
-                    <tr>
-                        <td><strong>8. 不動產成交案件實價資訊申報</strong></td>
-                        <td>1 份</td>
-                        <td>--</td>
-                    </tr>
-                    <tr>
-                        <td><strong>9. 授權書 ＋ 被授權人身分證影本</strong></td>
-                        <td>依現況</td>
-                        <td>--</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="cut-box" style="margin-bottom: 1.2rem; font-size: 0.95rem;">
+                <strong>⚠️ 送結案重點提醒：</strong>
+                <ul style="padding-left: 1.2rem; margin-top: 4px;">
+                    <li>要一併附上<strong>檢還資料清冊</strong>。</li>
+                    <li><strong>公契要掃描上傳</strong>。</li>
+                    <li>有權狀要另外檢還時，<strong>需另出表單</strong>。</li>
+                </ul>
+            </div>
+
+            <h3 style="color: var(--ty-primary); margin-bottom: 0.8rem;">📋 結案應備文件清單表</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 35%;">結案文件項目</th>
+                            <th style="width: 15%;">份數</th>
+                            <th style="width: 50%;">備註與製作規範</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <strong>1. 地價補償清冊</strong><br>
+                                <small style="color: #666; display: block; margin-top: 4px;">
+                                    ※ 補償清冊 = 封面 ＋ 索引表 ＋ 土地歸戶清冊<br>
+                                    ※ 所有權人為公共有時，需附上協議價購金分配書
+                                </small>
+                            </td>
+                            <td>
+                                3 份<br>
+                                <small style="color: #666;">（一批做成一式 3 份）</small>
+                            </td>
+                            <td>
+                                • 有蓋章格：<strong>1 份</strong>（補償清冊封面：1 份陳核歸檔、1 份發價、1 份留存）<br>
+                                • 無蓋章格：<strong>2 份</strong><br>
+                                • 協價分配書兩頁印同一張正反面
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>2. 協議價購契約書</strong> (一式 3 份)</td>
+                            <td>3 份</td>
+                            <td>--</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3. 印鑑證明</strong></td>
+                            <td>1 份 (或 2 份)</td>
+                            <td>--</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4. 所有權人身分證影本</strong></td>
+                            <td>1 份</td>
+                            <td>--</td>
+                        </tr>
+                        <tr>
+                            <td><strong>5. 存摺影本</strong></td>
+                            <td>1 份</td>
+                            <td>--</td>
+                        </tr>
+                        <tr>
+                            <td><strong>6. 土地所有權買賣移轉契約書</strong></td>
+                            <td>1 份</td>
+                            <td><span class="highlight-text">公契記得掃描上傳</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>7. 土地增值稅免稅證明書</strong></td>
+                            <td>依稅單筆數</td>
+                            <td>--</td>
+                        </tr>
+                        <tr>
+                            <td><strong>8. 不動產成交案件實價資訊申報</strong></td>
+                            <td>1 份</td>
+                            <td>--</td>
+                        </tr>
+                        <tr>
+                            <td><strong>9. 授權書 ＋ 被授權人身分證影本</strong></td>
+                            <td>依現況</td>
+                            <td>--</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
+    <!-- POP-UP MODALS 彈窗區塊 -->
+
+    <!-- 桃園稅務總局 -->
+    <div id="modal-tax-ty" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>📞 桃園稅務總局 承辦分機</h3>
+                <button class="modal-close" onclick="closeModal('modal-tax-ty')">&times;</button>
+            </div>
+            <div class="table-responsive">
+                <table>
+                    <thead><tr><th>承辦人員</th><th>分機</th></tr></thead>
+                    <tbody>
+                        <tr><td>朱百琪</td><td>#2753</td></tr>
+                        <tr><td>沈宛臻</td><td>#2753</td></tr>
+                        <tr><td>楊念蓁</td><td>#2754</td></tr>
+                        <tr><td>黃郁涵</td><td>#2755</td></tr>
+                        <tr><td>王品雅</td><td>#2756</td></tr>
+                        <tr><td>何韶婷</td><td>#2757</td></tr>
+                        <tr><td>葉貞江</td><td>#2762</td></tr>
+                        <tr><td>林佩青</td><td>#2763</td></tr>
+                        <tr><td>賴霈裕</td><td>#2764</td></tr>
+                        <tr><td>藍秀慈</td><td>#2764</td></tr>
+                        <tr><td>詹文嘉</td><td>#2767</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- 中壢稅務局 -->
+    <div id="modal-tax-zl" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>📞 中壢稅務局 承辦分機</h3>
+                <button class="modal-close" onclick="closeModal('modal-tax-zl')">&times;</button>
+            </div>
+            <div class="table-responsive">
+                <table>
+                    <thead><tr><th>承辦人員</th><th>分機</th><th>備註提醒</th></tr></thead>
+                    <tbody>
+                        <tr><td>李千有</td><td>#205</td><td>--</td></tr>
+                        <tr><td>吳亞芸</td><td>#205</td><td>--</td></tr>
+                        <tr><td>潘姿妏</td><td>#207</td><td><span class="yellow-highlight">記得要一直催稅單</span></td></tr>
+                        <tr><td>林承志</td><td>#208</td><td>--</td></tr>
+                        <tr><td>黃思涵</td><td>#208</td><td>--</td></tr>
+                        <tr><td>楊立嶕</td><td>#209</td><td>--</td></tr>
+                        <tr><td>李崔琳</td><td>#211</td><td>--</td></tr>
+                        <tr><td>葉庭豪</td><td>#215</td><td><span class="yellow-highlight">申請稅單動作很慢</span></td></tr>
+                        <tr><td>黃興龍</td><td>#215</td><td>--</td></tr>
+                        <tr><td>陳彥甯</td><td>#216</td><td>--</td></tr>
+                        <tr><td>李云</td><td>#217</td><td>--</td></tr>
+                        <tr><td>江美瑤</td><td>--</td><td><span style="color:#28a745; font-weight:bold;">稅單核發很快</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- 楊梅稅務局 -->
+    <div id="modal-tax-ym" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>📞 楊梅稅務局 承辦分機</h3>
+                <button class="modal-close" onclick="closeModal('modal-tax-ym')">&times;</button>
+            </div>
+            <div class="table-responsive">
+                <table>
+                    <thead><tr><th>承辦人員</th><th>分機</th></tr></thead>
+                    <tbody>
+                        <tr><td>陳映竹</td><td>#106</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- 蘆竹稅務局 -->
+    <div id="modal-tax-lz" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>📞 蘆竹稅務局 承辦分機</h3>
+                <button class="modal-close" onclick="closeModal('modal-tax-lz')">&times;</button>
+            </div>
+            <div class="table-responsive">
+                <table>
+                    <thead><tr><th>承辦人員</th><th>分機</th></tr></thead>
+                    <tbody>
+                        <tr><td>許麗娟</td><td>#125</td></tr>
+                        <tr><td>鍾孟蓉</td><td>--</td></tr>
+                        <tr><td>范雅婷</td><td>#126</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- 平鎮地政事務所 -->
+    <div id="modal-land-pz" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>📞 平鎮地政事務所 審查分機表</h3>
+                <button class="modal-close" onclick="closeModal('modal-land-pz')">&times;</button>
+            </div>
+            <div class="table-responsive">
+                <table>
+                    <thead><tr><th>類別</th><th>人員</th><th>分機</th></tr></thead>
+                    <tbody>
+                        <tr><td rowspan="2">複審</td><td>朱佩琪</td><td>103</td></tr>
+                        <tr><td>鄒貴嬌</td><td>105</td></tr>
+                        <tr><td rowspan="9">初審</td><td>吳貴博</td><td>116</td></tr>
+                        <tr><td>柯雅美</td><td>114</td></tr>
+                        <tr><td>呂季燕</td><td>104</td></tr>
+                        <tr><td>吳佩儒</td><td>106</td></tr>
+                        <tr><td>（初審）</td><td>107</td></tr>
+                        <tr><td>陳建達</td><td>112</td></tr>
+                        <tr><td>範志中</td><td>111</td></tr>
+                        <tr><td>劉麗卿</td><td>128</td></tr>
+                        <tr><td>林君諺</td><td>127</td></tr>
+                        <tr><td>單一</td><td>葉婉琳</td><td>102</td></tr>
+                        <tr><td rowspan="2">校對</td><td>黃政榮</td><td>115</td></tr>
+                        <tr><td>白薏萱</td><td>117</td></tr>
+                        <tr><td>未辦繼承</td><td>方准親</td><td>123</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- 通用簡易地所 Modals -->
+    <div id="modal-land-ty" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>桃園地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-ty')">&times;</button></div><p>登記科審查課分機：<strong>#102 ~ #115</strong></p></div></div>
+    <div id="modal-land-zl" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>中壢地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-zl')">&times;</button></div><p>登記科審查課分機：<strong>#105 ~ #118</strong></p></div></div>
+    <div id="modal-land-ym" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>楊梅地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-ym')">&times;</button></div><p>登記科審查課分機：<strong>#101 ~ #106</strong></p></div></div>
+    <div id="modal-land-lz" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>蘆竹地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-lz')">&times;</button></div><p>登記科審查課分機：<strong>#111 ~ #116</strong></p></div></div>
+    <div id="modal-land-dx" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>大溪地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-dx')">&times;</button></div><p>登記科審查課分機：<strong>#102 ~ #108</strong></p></div></div>
+    <div id="modal-land-bd" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>八德地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-bd')">&times;</button></div><p>登記科審查課分機：<strong>#101 ~ #105</strong></p></div></div>
+    <div id="modal-land-ks" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>龜山地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-ks')">&times;</button></div><p>登記科審查課分機：<strong>#101 ~ #105</strong></p></div></div>
+
     <script>
+        // 切換頁籤
         function switchStep(stepNumber) {
             const cards = document.querySelectorAll('.step-card');
             cards.forEach((card, index) => {
@@ -1192,6 +1342,23 @@
             const activePanel = document.getElementById(`step-${stepNumber}`);
             if (activePanel) {
                 activePanel.classList.add('active');
+            }
+        }
+
+        // Pop-up Modal 控制
+        function openModal(modalId) {
+            const target = document.getElementById(modalId);
+            if(target) target.classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            const target = document.getElementById(modalId);
+            if(target) target.classList.remove('active');
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                event.target.classList.remove('active');
             }
         }
     </script>
