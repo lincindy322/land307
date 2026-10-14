@@ -965,7 +965,7 @@
                 <div class="info-card">
                     <h3>📝 1. 申報實價登錄</h3>
                     <ul>
-                        <li><strong>特殊交易標的：</strong>若包含<span>「公共設施保留地（用地）」</span>，當都市計畫內有載明時，<span class="highlight-text">一定要勾選</span>。</li>
+                        <li><strong>特殊交易標的：</strong>若包含「公共設施保留地（用地）」，當都市計畫內有載明時，<span class="highlight-text">一定要勾選</span>。</li>
                         <li><strong>地號輸入：</strong>協議價購已有價購清冊，<span class="highlight-text">不須分別打地號</span>。</li>
                     </ul>
                 </div>
@@ -1036,15 +1036,15 @@
                             <td><strong>大溪地政事務所</strong></td>
                             <td style="white-space: nowrap;">大溪區、復興區、龍潭區</td>
                             <td>(03) 388-3161<br><small>大溪區員林路一段189號</small></td>
-                            <td><button class="btn-link sec" onclick="openModal('modal-land-dx')">📞 #102~108</button></td>
+                            <td><button class="btn-link sec" onclick="openModal('modal-land-dx')">📞 查看詳細</button></td>
                             <td>--</td>
                         </tr>
                         <tr>
                             <td><strong>八德地政事務所</strong></td>
                             <td style="white-space: nowrap;">八德區</td>
                             <td>(03) 368-2015<br><small>八德區興豐路268號</small></td>
-                            <td><button class="btn-link sec" onclick="openModal('modal-land-bd')">📞 #101~105</button></td>
-                            <td>--</td>
+                            <td><button class="btn-link sec" onclick="openModal('modal-land-bd')">📞 查看詳細</button></td>
+                            <td>大宗案件的實價登錄+委託書要另外釘（兩張釘一起，一個人一份）。</td>
                         </tr>
                         <tr>
                             <td><strong>龜山地政事務所</strong></td>
@@ -1065,6 +1065,8 @@
                 <div class="panel-links-row">
                     <a href="https://www.land.tycg.gov.tw/chaspx/SQry3.aspx/22" target="_blank" rel="noopener noreferrer" class="btn-link">🔎 桃園地政案件辦理查詢</a>
                     <a href="https://dcland.moi.gov.tw/CaseStatus/AGTQuery" target="_blank" rel="noopener noreferrer" class="btn-link sec">🌐 跨域代收案件查詢</a>
+                    <a href="https://www.rocrea.org.tw/_i/assets/file/download/c4b9f4d8238711734b671f5e6e4665bf.pdf" target="_blank" rel="noopener noreferrer" class="btn-link sec">📖 111年版土地登記審查手冊 (上)</a>
+                    <a href="https://www.land.moi.gov.tw/Other/20221230185138w.pdf" target="_blank" rel="noopener noreferrer" class="btn-link sec">📖 111年版土地登記審查手冊 (下)</a>
                 </div>
             </div>
 
@@ -1180,7 +1182,7 @@
         </div>
     </div>
 
-    <!-- POP-UP MODALS 彈窗區塊 (分類內部已完全按分機由小到大排序) -->
+    <!-- POP-UP MODALS 彈窗區塊 -->
 
     <!-- 桃園稅務總局 -->
     <div id="modal-tax-ty" class="modal-overlay">
@@ -1305,7 +1307,7 @@
         </div>
     </div>
 
-    <!-- 平鎮地政事務所 (已嚴格按分類內分機由小到大排序) -->
+    <!-- 平鎮地政事務所 -->
     <div id="modal-land-pz" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
@@ -1336,13 +1338,60 @@
         </div>
     </div>
 
+    <!-- 大溪地政事務所 -->
+    <div id="modal-land-dx" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>📞 大溪地政事務所 審查分機表</h3>
+                <button class="modal-close" onclick="closeModal('modal-land-dx')">&times;</button>
+            </div>
+            <table class="modal-table">
+                <thead><tr><th style="width: 30%;">主辦業務</th><th style="width: 35%;">姓名</th><th style="width: 35%;">分機</th></tr></thead>
+                <tbody>
+                    <tr><td>初審</td><td>王若安</td><td>104</td></tr>
+                    <tr><td>初審</td><td>唐建霖</td><td>105</td></tr>
+                    <tr><td>初審</td><td>蔡如喬</td><td>106</td></tr>
+                    <tr><td>初審</td><td>宋奕霆</td><td>107</td></tr>
+                    <tr><td>原保地</td><td>林嘉欣</td><td>108</td></tr>
+                    <tr><td>初審</td><td>黃友廷</td><td>109</td></tr>
+                    <tr><td>地價.未辦</td><td>陳韻恩</td><td>110</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 八德地政事務所 -->
+    <div id="modal-land-bd" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>📞 八德地政事務所 審查分機表</h3>
+                <button class="modal-close" onclick="closeModal('modal-land-bd')">&times;</button>
+            </div>
+            <table class="modal-table">
+                <thead><tr><th style="width: 40%;">姓名</th><th style="width: 60%;">分機</th></tr></thead>
+                <tbody>
+                    <tr><td>邱奕斌</td><td>402</td></tr>
+                    <tr><td>黃麒紘</td><td>403</td></tr>
+                    <tr><td>楊國英</td><td>407</td></tr>
+                    <tr><td>吳珮瑄</td><td>409</td></tr>
+                    <tr><td>陳佳穎</td><td>426</td></tr>
+                    <tr><td>蕭培庭</td><td>427</td></tr>
+                    <tr><td>連邑庭</td><td>429</td></tr>
+                    <tr><td>蔡恩妮</td><td>430</td></tr>
+                    <tr><td>萬文琪</td><td>435</td></tr>
+                    <tr><td>翁馳閎</td><td>436</td></tr>
+                    <tr><td>黃莉莉</td><td>437</td></tr>
+                    <tr><td>鄭維瑩</td><td>439</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     <!-- 通用簡易地所 Modals -->
     <div id="modal-land-ty" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>桃園地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-ty')">&times;</button></div><p style="text-align:center; padding: 10px 0;">登記科審查課分機：<strong>#102 ~ #115</strong></p></div></div>
     <div id="modal-land-zl" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>中壢地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-zl')">&times;</button></div><p style="text-align:center; padding: 10px 0;">登記科審查課分機：<strong>#105 ~ #118</strong></p></div></div>
     <div id="modal-land-ym" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>楊梅地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-ym')">&times;</button></div><p style="text-align:center; padding: 10px 0;">登記科審查課分機：<strong>#101 ~ #106</strong></p></div></div>
     <div id="modal-land-lz" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>蘆竹地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-lz')">&times;</button></div><p style="text-align:center; padding: 10px 0;">登記科審查課分機：<strong>#111 ~ #116</strong></p></div></div>
-    <div id="modal-land-dx" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>大溪地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-dx')">&times;</button></div><p style="text-align:center; padding: 10px 0;">登記科審查課分機：<strong>#102 ~ #108</strong></p></div></div>
-    <div id="modal-land-bd" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>八德地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-bd')">&times;</button></div><p style="text-align:center; padding: 10px 0;">登記科審查課分機：<strong>#101 ~ #105</strong></p></div></div>
     <div id="modal-land-ks" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>龜山地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-ks')">&times;</button></div><p style="text-align:center; padding: 10px 0;">登記科審查課分機：<strong>#101 ~ #105</strong></p></div></div>
 
     <script>
