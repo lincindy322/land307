@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍑</text></svg>">
     <title>徐瑛宜地政事務所—桃園協議價購案件辦理流程</title>
+    <!-- 網站 Favicon (桃子圖示) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍑</text></svg>">
     <style>
         :root {
             --ty-primary: #E6005A;   /* 桃園桃紅 (魅力桃園) */
@@ -835,7 +836,6 @@
                         <ul style="padding-left: 1.2rem; margin-top: 4px;">
                             <li>土地分區是否已正確變成<strong>交通用地</strong>。</li>
                             <li>確認<strong>沒有原地主造成的註記</strong>（例如：農舍套繪等）。</li>
-                            <li>案件應附資料：身分證影本、假割圖、權狀</li>
                         </ul>
                     </div>
                 </div>
@@ -1016,7 +1016,7 @@
                                 1. 實價登錄申報書及委託書釘<span class="highlight-text">土地登記申請書正面上方</span>。<br>
                                 2. 需在登記申請書備註欄切結：
                                 <div class="cut-box">
-                                    「本案確為土地徵收條例第11條第一項所規定之協議價購，依同條第三項之規定，確無優先購買權之適用。」
+                                    「本案確為土地徵收條例第11條第一項所規定之協議價購, 依同條第三項之規定，確無優先購買權之適用。」
                                 </div>
                             </td>
                         </tr>
@@ -1397,7 +1397,7 @@
     <div id="modal-land-ks" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>龜山地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-ks')">&times;</button></div><p style="text-align:center; padding: 10px 0;">登記科審查課分機：<strong>#101 ~ #105</strong></p></div></div>
 
     <script>
-        function switchStep(stepNumber) {
+        function switchStep(stepNumber, updateHash = true) {
             const cards = document.querySelectorAll('.step-card');
             cards.forEach((card, index) => {
                 if (index === stepNumber - 1) {
@@ -1416,6 +1416,11 @@
             if (activePanel) {
                 activePanel.classList.add('active');
             }
+
+            // 更新網址 Hash (例: #1, #2...)
+            if (updateHash) {
+                history.pushState(null, null, `#${stepNumber}`);
+            }
         }
 
         function openModal(modalId) {
@@ -1433,6 +1438,21 @@
                 event.target.classList.remove('active');
             }
         }
+
+        // 頁面載入或使用者點擊上一頁/下一頁時，根據網址 Hash 自動切換步驟
+        function handleHash() {
+            const hash = window.location.hash;
+            const match = hash.match(/^#([1-8])$/);
+            if (match) {
+                const stepNum = parseInt(match[1]);
+                switchStep(stepNum, false);
+            } else {
+                switchStep(1, false);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', handleHash);
+        window.addEventListener('hashchange', handleHash);
     </script>
 </body>
 </html>
