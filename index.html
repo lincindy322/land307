@@ -6,6 +6,8 @@
     <title>徐瑛宜地政事務所—桃園協議價購案件辦理流程</title>
     <!-- 網站 Favicon (桃子圖示) -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍑</text></svg>">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <style>
         :root {
             --ty-primary: #E6005A;   /* 桃園桃紅 (魅力桃園) */
@@ -390,6 +392,17 @@
             border-radius: 12px;
             font-size: 0.8rem;
             border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        /* 地圖容器樣式 */
+        .map-container {
+            width: 100%;
+            height: 420px;
+            border-radius: 8px;
+            border: 2px solid var(--ty-gray);
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
+            z-index: 1;
         }
 
         /* Modal 彈窗樣式 */
@@ -852,6 +865,11 @@
                 </div>
             </div>
 
+            <!-- 步驟五：互動地圖視覺化 -->
+            <h3 style="color: var(--ty-primary); margin-top: 0.5rem; margin-bottom: 0.2rem;">🗺️ 桃園地方稅務局總局與分局分布地圖</h3>
+            <p style="font-size: 0.88rem; color: #666; margin-bottom: 0.5rem;">點擊地圖上的標記可檢視各稅務分局轄區、地址與分機資訊：</p>
+            <div id="tax-map" class="map-container"></div>
+
             <div class="info-grid">
                 <div class="info-card">
                     <h3>💻 1. 到顧代書生成土地增值稅檔案</h3>
@@ -962,6 +980,11 @@
                     <a href="https://land.tycg.gov.tw/News_Link.aspx?n=4142&sms=10098" target="_blank" rel="noopener noreferrer" class="btn-link sec">🔗 桃園地政局轄區地所</a>
                 </div>
             </div>
+
+            <!-- 步驟六：互動地圖視覺化 -->
+            <h3 style="color: var(--ty-primary); margin-top: 0.5rem; margin-bottom: 0.2rem;">🗺️ 桃園市各地政事務所位置與轄區地圖</h3>
+            <p style="font-size: 0.88rem; color: #666; margin-bottom: 0.5rem;">點擊地圖上的地所標記可檢視地址、電話、審查分機與送件注意事項：</p>
+            <div id="land-map" class="map-container"></div>
 
             <div class="info-grid">
                 <div class="info-card">
@@ -1396,7 +1419,13 @@
     <div id="modal-land-lz" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>蘆竹地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-lz')">&times;</button></div><p style="text-align:center; padding: 10px 0;">登記科審查課分機：<strong>#111 ~ #116</strong></p></div></div>
     <div id="modal-land-ks" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>龜山地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-ks')">&times;</button></div><p style="text-align:center; padding: 10px 0;">登記科審查課分機：<strong>#101 ~ #105</strong></p></div></div>
 
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
     <script>
+        let taxMap = null;
+        let landMap = null;
+
         function switchStep(stepNumber, updateHash = true) {
             const cards = document.querySelectorAll('.step-card');
             cards.forEach((card, index) => {
@@ -1417,10 +1446,91 @@
                 activePanel.classList.add('active');
             }
 
+            // 當切換到步驟 5 或 6 時，初始化或重整 Leaflet 地圖大小 (避免 CSS 隱藏切換導致地圖渲染不全)
+            setTimeout(() => {
+                if (stepNumber === 5) {
+                    if (!taxMap) {
+                        initTaxMap();
+                    } else {
+                        taxMap.invalidateSize();
+                    }
+                } else if (stepNumber === 6) {
+                    if (!landMap) {
+                        initLandMap();
+                    } else {
+                        landMap.invalidateSize();
+                    }
+                }
+            }, 100);
+
             // 更新網址 Hash (例: #1, #2...)
             if (updateHash) {
                 history.pushState(null, null, `#${stepNumber}`);
             }
+        }
+
+        // 初始化步驟五：稅務局及分局地圖
+        function initTaxMap() {
+            taxMap = L.map('tax-map').setView([24.95, 121.22], 11);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+                maxZoom: 19,
+                attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
+            }).addTo(taxMap);
+
+            const taxOffices = [
+                { name: "桃園市地方稅務局 (總局)", lat: 24.9972, lng: 121.3094, addr: "桃園區成功路二段179號", tel: "(03) 332-6181", scope: "桃園區、龜山區、八德區", modal: "modal-tax-ty" },
+                { name: "中壢分局", lat: 24.9583, lng: 121.2241, addr: "中壢區溪洲街296號3樓", tel: "(03) 451-5111", scope: "中壢區、平鎮區、觀音區", modal: "modal-tax-zl" },
+                { name: "大溪分局", lat: 24.8812, lng: 121.2845, addr: "大溪區員林路一段16號", tel: "(03) 380-0072", scope: "大溪區、龍潭區、復興區", modal: "modal-tax-dx-tax" },
+                { name: "楊梅分局", lat: 24.9123, lng: 121.1456, addr: "楊梅區中山路212號", tel: "(03) 478-1974", scope: "楊梅區、新屋區", modal: "modal-tax-ym" },
+                { name: "蘆竹分局", lat: 25.0456, lng: 121.2912, addr: "蘆竹區南崁路150號2樓", tel: "(03) 352-8671", scope: "蘆竹區、大園區", modal: "modal-tax-lz" }
+            ];
+
+            taxOffices.forEach(office => {
+                const marker = L.marker([office.lat, office.lng]).addTo(taxMap);
+                marker.bindPopup(`
+                    <div style="font-size: 0.9rem;">
+                        <strong style="color: #E6005A; font-size: 1rem;">${office.name}</strong><br>
+                        <strong>轄區：</strong>${office.scope}<br>
+                        <strong>地址：</strong>${office.addr}<br>
+                        <strong>電話：</strong>${office.tel}<br>
+                        <button class="btn-link sec" style="margin-top:6px; padding:3px 8px; font-size:0.8rem;" onclick="openModal('${office.modal}')">📞 查看承辦分機</button>
+                    </div>
+                `);
+            });
+        }
+
+        // 初始化步驟六：地政事務所地圖
+        function initLandMap() {
+            landMap = L.map('land-map').setView([24.95, 121.22], 11);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+                maxZoom: 19,
+                attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
+            }).addTo(landMap);
+
+            const landOffices = [
+                { name: "桃園地政事務所", lat: 24.9754, lng: 121.2952, addr: "桃園區國豐三街123號", tel: "(03) 369-5588", scope: "桃園區", modal: "modal-land-ty", note: "實價登錄申報書及委託書釘公契第二聯背面上方。" },
+                { name: "中壢地政事務所", lat: 24.9451, lng: 121.2312, addr: "中壢區松勇二街59號", tel: "(03) 452-9210", scope: "中壢區、觀音區", modal: "modal-land-zl", note: "實價登錄申報書及委託書釘公契第二聯背面下方。" },
+                { name: "平鎮地政事務所", lat: 24.9382, lng: 121.2154, addr: "平鎮區環南路二段276號", tel: "(03) 459-2210", scope: "平鎮區", modal: "modal-land-pz", note: "需於登記申請書備註欄加註協議價購切結文字。" },
+                { name: "楊梅地政事務所", lat: 24.9102, lng: 121.1512, addr: "楊梅區校前路408號", tel: "(03) 478-2121", scope: "楊梅區、新屋區", modal: "modal-land-ym", note: "實價登錄申報書及委託書對折釘在登記原因下方。" },
+                { name: "蘆竹地政事務所", lat: 25.0431, lng: 121.2854, addr: "蘆竹區長安路二段236號", tel: "(03) 322-5201", scope: "蘆竹區、大園區", modal: "modal-land-lz", note: "送件前通知領狀欄位可直接先蓋好代書章。" },
+                { name: "大溪地政事務所", lat: 24.8835, lng: 121.2872, addr: "大溪區康莊路95號", tel: "(03) 388-3161", scope: "大溪區、復興區、龍潭區", modal: "modal-land-dx", note: "大溪地政會主動換狀。" },
+                { name: "八德地政事務所", lat: 24.9284, lng: 121.2851, addr: "八德區重慶街146號", tel: "(03) 368-2015", scope: "八德區", modal: "modal-land-bd", note: "大宗案件的實價登錄+委託書要另外釘（兩張釘一起，一人一份）。" },
+                { name: "龜山地政事務所", lat: 24.9921, lng: 121.3412, addr: "龜山區自強南路105號", tel: "(03) 350-2020", scope: "龜山區", modal: "modal-land-ks", note: "--" }
+            ];
+
+            landOffices.forEach(office => {
+                const marker = L.marker([office.lat, office.lng]).addTo(landMap);
+                marker.bindPopup(`
+                    <div style="font-size: 0.9rem;">
+                        <strong style="color: #E6005A; font-size: 1rem;">${office.name}</strong><br>
+                        <strong>轄區：</strong>${office.scope}<br>
+                        <strong>地址：</strong>${office.addr}<br>
+                        <strong>電話：</strong>${office.tel}<br>
+                        <strong style="color: #333;">注意事項：</strong>${office.note}<br>
+                        <button class="btn-link sec" style="margin-top:6px; padding:3px 8px; font-size:0.8rem;" onclick="openModal('${office.modal}')">📞 查看審查分機</button>
+                    </div>
+                `);
+            });
         }
 
         function openModal(modalId) {
