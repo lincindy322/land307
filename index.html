@@ -776,11 +776,11 @@
                 <div class="info-card">
                     <h3>📚 2. 用印文件排序與裝訂規範</h3>
                     <ol>
-                        <li>私契</li>
-                        <li>土地登記申請書：<span class="highlight-text">A3 文件可以攤開疊一起再對折</span>。</li>
-                        <li>土地買賣移轉契約書 (公契)：<span class="highlight-text">A3 文件可以攤開疊一起再對折</span>。</li>
-                        <li>土地增值稅申報書</li>
-                        <li>實登委託書</li>
+                        <li>* 私契</li>
+                        <li>* 土地登記申請書：<span class="highlight-text">A3 文件可以攤開疊一起再對折</span>。</li>
+                        <li>* 土地買賣移轉契約書 (公契)：<span class="highlight-text">A3 文件可以攤開疊一起再對折</span>。</li>
+                        <li>* 土地增值稅申報書</li>
+                        <li>* 實登委託書</li>
                     </ol>
                     <p style="margin-top: 8px; font-size: 0.9rem; color: var(--ty-primary); font-weight: bold;">
                         ※ 用印文件請統一標註訂書針不要拆開，方便秘書室核對。
@@ -1002,7 +1002,7 @@
                             <td><strong>桃園地政事務所</strong></td>
                             <td style="white-space: nowrap;">桃園區</td>
                             <td>(03) 369-5588<br><small>桃園區國豐三街123號</small></td>
-                            <td><button class="btn-link sec" onclick="openModal('modal-land-ty')">📞 #102~115</button></td>
+                            <td><button class="btn-link sec" onclick="openModal('modal-land-ty')">📞 查看詳細</button></td>
                             <td>實價登錄申報書及委託書釘<span class="highlight-text">公契第二聯背面上方</span>。</td>
                         </tr>
                         <tr>
@@ -1314,6 +1314,55 @@
         </div>
     </div>
 
+    <!-- 桃園地政事務所 (更新後依據照片) -->
+    <div id="modal-land-ty" class="modal-overlay">
+        <div class="modal-content wide">
+            <div class="modal-header">
+                <h3>📞 桃園地政事務所 諮詢人員分機號碼</h3>
+                <button class="modal-close" onclick="closeModal('modal-land-ty')">&times;</button>
+            </div>
+            <table class="modal-table">
+                <thead><tr><th style="width: 25%;">職稱</th><th style="width: 25%;">姓名</th><th style="width: 50%;">分機</th></tr></thead>
+                <tbody>
+                    <tr><td>課長</td><td>陳怡蓁</td><td>#101</td></tr>
+                    <tr><td rowspan="3">業務主辦</td><td>謝坤達</td><td>#102</td></tr>
+                    <tr><td>陳亮宇</td><td>#103</td></tr>
+                    <tr><td>黃昱翰</td><td>#105</td></tr>
+                    <tr><td rowspan="4">複審</td><td>陳吟欣</td><td>#116</td></tr>
+                    <tr><td>游雪珍</td><td>#129</td></tr>
+                    <tr><td>邱顯祥</td><td>#166</td></tr>
+                    <tr><td>宋秀菊</td><td>#167</td></tr>
+                    <tr><td rowspan="3">簡易審查</td><td>黃千桂</td><td>#168</td></tr>
+                    <tr><td>黃美惠</td><td>#113</td></tr>
+                    <tr><td>陳思妤</td><td>#115</td></tr>
+                    <tr><td rowspan="4">校對審查</td><td>江惠雯</td><td>#172</td></tr>
+                    <tr><td>陳品華</td><td>#153</td></tr>
+                    <tr><td>陳彥良</td><td>#152</td></tr>
+                    <tr><td>陳禹煊</td><td>#120</td></tr>
+                    <tr><td>地清未辦</td><td>陳建輝</td><td>#143</td></tr>
+                    <tr><td rowspan="16">初審</td><td>邱鈺舒</td><td>#106</td></tr>
+                    <tr><td>曾則斌</td><td>#109</td></tr>
+                    <tr><td>張寧芮</td><td>#112</td></tr>
+                    <tr><td>陳奕翔</td><td>#111</td></tr>
+                    <tr><td>陳素貞</td><td>#154</td></tr>
+                    <tr><td>鍾承佑</td><td>#174</td></tr>
+                    <tr><td>呂紹帆</td><td>#119</td></tr>
+                    <tr><td>歐陽洪</td><td>#126</td></tr>
+                    <tr><td>李世華</td><td>#151</td></tr>
+                    <tr><td>陳鏡仰</td><td>#165</td></tr>
+                    <tr><td>林碧沄</td><td>#169</td></tr>
+                    <tr><td>林逸婷</td><td>#173</td></tr>
+                    <tr><td>陳秋蓉</td><td>#110</td></tr>
+                    <tr><td>陳萩帆</td><td>#117</td></tr>
+                    <tr><td>李淑萍</td><td>#175</td></tr>
+                    <tr><td>林麗君</td><td>#176</td></tr>
+                    <tr><td>列狀</td><td>游宜靜</td><td>#161</td></tr>
+                    <tr><td>地價</td><td>劉燕欣</td><td>#163</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     <!-- 平鎮地政事務所 -->
     <div id="modal-land-pz" class="modal-overlay">
         <div class="modal-content">
@@ -1451,7 +1500,6 @@
     </div>
 
     <!-- 通用簡易地所 Modals -->
-    <div id="modal-land-ty" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>桃園地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-ty')">&times;</button></div><p style="text-align:center; padding: 10px 0;">登記科審查課分機：<strong>#102 ~ #115</strong></p></div></div>
     <div id="modal-land-zl" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>中壢地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-zl')">&times;</button></div><p style="text-align:center; padding: 10px 0;">登記科審查課分機：<strong>#105 ~ #118</strong></p></div></div>
     <div id="modal-land-ks" class="modal-overlay"><div class="modal-content"><div class="modal-header"><h3>龜山地所 審查課</h3><button class="modal-close" onclick="closeModal('modal-land-ks')">&times;</button></div><p style="text-align:center; padding: 10px 0;">登記科審查課分機：<strong>#101 ~ #105</strong></p></div></div>
 
